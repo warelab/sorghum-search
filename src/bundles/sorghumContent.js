@@ -4,7 +4,7 @@ const bundle = createAsyncResourceBundle({
   name: 'sorghumContent',
   actionBaseType: 'SORGHUM_CMS',
   getPromise: ({store}) =>
-    fetch(`http://localhost:5000/search_api/Sorghumbase?${store.selectQueryString()}`)
+    fetch(`http://brie6:8081/search_api/Sorghumbase?${store.selectQueryString()}`)
       .then(res => res.json())
 });
 
