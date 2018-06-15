@@ -1,30 +1,34 @@
-import { connect } from 'redux-bundler-preact'
-import { h } from 'preact'
+import {connect} from 'redux-bundler-preact'
+import {h} from 'preact'
 
-const ResultSummary = ({sorghumContent}) => {
-  const status = sorghumContent
-    ? (<span class="badge badge-primary">{sorghumContent.numFound}</span>)
-    : (<img src="//brie6:8081/static/images/dna_spinner_sm.svg" />);
+const ResultSummary = ({sorghumCounts}) => {
+  const status = sorghumCounts
+    ? <span class="badge badge-primary">{sorghumCounts.total}</span>
+    : <img src="//brie6:8081/static/images/dna_spinner_sm.svg"/>;
+
+  const categories = sorghumCounts
+    ? (
+      <ul class="list-unstyled categories">
+        {
+          Object.entries(sorghumCounts.types).map(([name,count]) => (
+            <li>{name}s <span class="badge badge-primary">{count}</span></li>
+          ))
+        }
+      </ul>
+    )
+    : '';
+
   return (
-    <div class="card mb10">
-      <div class="card-header accordion-header" role="tab" id="headingSorghum">
-        <h5 class="mb-0">
-          <a data-toggle="collapse" data-parent="#accordion" href="#collapseSorghum" aria-expanded="false" aria-controls="collapseSorghum" class="collapsed">
-            Sorghum CMS &nbsp;&nbsp;{status}
-          </a>
-        </h5>
-      </div>
-
-      <div id="collapseSorghum" class="collapse" role="tabpanel" aria-labelledby="headingSorghum" style="">
-        <div class="card-body">
-          <a data-scroll="" href="#sorghum" className="nav-link active">link to results of a given type</a>
-        </div>
-      </div>
-    </div>
+    <li class="active">
+      <a href="#sorghum" data-scroll="" class="nav-link active">
+        Sorghum CMS &nbsp;&nbsp;{status}
+      </a>
+      {categories}
+    </li>
   )
-}
+};
 
 export default connect(
-  'selectSorghumContent',
+  'selectSorghumCounts',
   ResultSummary
 )

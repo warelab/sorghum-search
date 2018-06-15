@@ -5,9 +5,9 @@ import Gramene from './gramene/resultSummary'
 
 export default (store) => (
   <Provider store={store}>
-    <div id="accordion" class="mb70" role="tablist" aria-multiselectable="true">
+    <ul class="list-unstyled categories">
       <Sorghum />
       <Gramene />
-    </div>
+    </ul>
   </Provider>
 )
