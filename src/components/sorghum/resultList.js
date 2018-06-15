@@ -6,7 +6,7 @@ const ResultsList = ({sorghumContent}) => (
     <div class="col">
       <div>
         {!sorghumContent && (
-          <img src="//brie6:8081/static/images/dna_spinner.svg" />
+          <pre>searching</pre>
         )}
         {sorghumContent && (
           <code>{JSON.stringify(sorghumContent)}</code>
