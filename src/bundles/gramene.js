@@ -1,21 +1,106 @@
-import { createAsyncResourceBundle, createSelector } from 'redux-bundler'
+import { createAsyncResourceBundle, createSelector, composeBundles } from 'redux-bundler'
+import _ from 'lodash'
+const facets = [
+  "{!facet.limit='200' facet.mincount='1' key='taxon_id'}taxon_id",
+  "{!facet.limit='100' facet.mincount='1' key='genetree'}gene_tree",
+  "{!facet.limit='100' facet.mincount='1' key='pathways'}pathways__ancestors",
+  "{!facet.limit='100' facet.mincount='1' key='domains'}domain_roots"
+];
 
-const bundle = createAsyncResourceBundle({
-  name: 'gramene',
-  actionBaseType: 'GRAMENE',
+const grameneGenes = createAsyncResourceBundle({
+  name: 'grameneGenes',
+  actionBaseType: 'GRAMENE_GENES',
   getPromise: ({store}) =>
-    fetch(`http://data.gramene.org/search?${store.selectQueryString()}`)
+    fetch(`http://data.gramene.org/search?${store.selectQueryString()}&facet.field=${facets}`)
       .then(res => res.json())
 });
 
-bundle.reactGramene = createSelector(
-  'selectGrameneShouldUpdate',
+grameneGenes.reactGrameneGenes = createSelector(
+  'selectGrameneGenesShouldUpdate',
   'selectQueryString',
   (shouldUpdate, queryString) => {
     if (shouldUpdate && queryString) {
-      return { actionCreator: 'doFetchGramene' }
+      return { actionCreator: 'doFetchGrameneGenes' }
     }
   }
 );
 
-export default bundle
+grameneGenes.reactDomainFacets = createSelector(
+  'selectGrameneDomainsShouldUpdate',
+  'selectGrameneGenes',
+  (shouldUpdate, grameneGenes) => {
+    if (shouldUpdate && grameneGenes) {
+      return { actionCreator: 'doFetchGrameneDomains' }
+    }
+  }
+);
+
+grameneGenes.reactPathwayFacets = createSelector(
+  'selectGramenePathwaysShouldUpdate',
+  'selectGrameneGenes',
+  (shouldUpdate, grameneGenes) => {
+    if (shouldUpdate && grameneGenes) {
+      return { actionCreator: 'doFetchGramenePathways' }
+    }
+  }
+);
+
+grameneGenes.reactTaxonomyFacets = createSelector(
+  'selectGrameneTaxonomyShouldUpdate',
+  'selectGrameneGenes',
+  (shouldUpdate, grameneGenes) => {
+    if (shouldUpdate && grameneGenes) {
+      return { actionCreator: 'doFetchGrameneTaxonomy' }
+    }
+  }
+);
+
+function selectFacetIDs(store, field) {
+  const path = `grameneGenes.data.facet_counts.facet_fields.${field}`;
+  if (_.has(store,path)) {
+    const flat_facets = _.get(store,path);
+    let idList = [];
+    if (isNaN(+flat_facets[0])) {
+      for (let i = 0; i < flat_facets.length; i += 2) {
+        idList.push(flat_facets[i])
+      }
+    }
+    else {
+      for (let i = 0; i < flat_facets.length; i += 2) {
+        idList.push(+flat_facets[i])
+      }
+      if (idList.length === 1) idList.push(0);
+    }
+    return idList;
+  }
+}
+
+grameneGenes.selectDomainFacets = store => selectFacetIDs(store, 'domains');
+grameneGenes.selectPathwayFacets = store => selectFacetIDs(store, 'pathways');
+grameneGenes.selectTaxonomyFacets = store => selectFacetIDs(store, 'taxon_id');
+
+const grameneDomains = createAsyncResourceBundle({
+  name: 'grameneDomains',
+  actionBaseType: 'GRAMENE_DOMAINS',
+  getPromise: ({store}) =>
+    fetch(`http://data.gramene.org/domains?idList=${store.selectDomainFacets().join(',')}`)
+      .then(res => res.json())
+});
+
+const gramenePathways = createAsyncResourceBundle({
+  name: 'gramenePathways',
+  actionBaseType: 'GRAMENE_PATHWAYS',
+  getPromise: ({store}) =>
+    fetch(`http://data.gramene.org/pathways?idList=${store.selectPathwayFacets().join(',')}`)
+      .then(res => res.json())
+});
+
+const grameneTaxonomy = createAsyncResourceBundle({
+  name: 'grameneTaxonomy',
+  actionBaseType: 'GRAMENE_TAXONOMY',
+  getPromise: ({store}) =>
+    fetch(`http://data.gramene.org/taxonomy?idList=${store.selectTaxonomyFacets().join(',')}`)
+      .then(res => res.json())
+});
+
+export default [grameneGenes, grameneDomains, gramenePathways, grameneTaxonomy]

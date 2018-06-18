@@ -8,26 +8,6 @@ const bundle = createAsyncResourceBundle({
       .then(res => res.json())
 });
 
-bundle.selectSorghumCounts = createSelector(
-  'selectSorghumContent',
-  content => {
-    if (!content) return false;
-    let counts = {}
-    content.docs.forEach(d => {
-      if (!counts.hasOwnProperty(d.type)) {
-        counts[d.type] = 1;
-      }
-      else {
-        counts[d.type]++;
-      }
-    });
-    return {
-      total: content.numFound,
-      types: counts
-    }
-  }
-);
-
 bundle.reactSorghumContent = createSelector(
   'selectSorghumContentShouldUpdate',
   'selectQueryString',

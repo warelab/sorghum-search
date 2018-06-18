@@ -1,15 +1,15 @@
 import { connect } from 'redux-bundler-preact'
 import { h } from 'preact'
 
-const ResultsList = ({gramene}) => (
+const ResultsList = ({grameneGenes}) => (
   <div id="gramene" class="pt50 row">
     <div class="col">
       <div>
-        {!gramene && (
+        {!grameneGenes && (
           <pre>searching</pre>
         )}
-        {gramene && (
-          <code>{JSON.stringify(gramene)}</code>
+        {grameneGenes && (
+          <code>{JSON.stringify(grameneGenes)}</code>
         )}
       </div>
     </div>
@@ -17,6 +17,6 @@ const ResultsList = ({gramene}) => (
 )
 
 export default connect(
-  'selectGramene',
+  'selectGrameneGenes',
   ResultsList
 )
