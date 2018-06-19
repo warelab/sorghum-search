@@ -3,6 +3,6 @@ import sorghumContent from './sorghumContent'
 import grameneBundles from './gramene'
 
 export default composeBundles(
-  sorghumContent,
+  ...sorghumContent,
   ...grameneBundles
 )

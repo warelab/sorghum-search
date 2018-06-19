@@ -3,18 +3,18 @@ import { h } from 'preact'
 
 const ResultSummary = ({grameneGenes}) => {
   const status = grameneGenes
-    ? (<span style="float:right;" class="badge badge-primary">{grameneGenes.response.numFound}</span>)
-    : (<img src="//brie6:8081/static/images/dna_spinner.svg" />);
+    ? grameneGenes.response.numFound
+    : <img src="//brie6:8081/static/images/dna_spinner.svg" />;
   return (
     <li class="active">
       <a href="#gramene" data-scroll="" class="nav-link active">
-        Gramene Search &nbsp;&nbsp;{status}
+        Gramene Search
       </a>
       <ul class="list-unstyled">
-        <a>genes</a>
-        <a>gene trees</a>
-        <a>domains</a>
-        <a>species</a>
+        <li><a>Genes<span style="float:right;">{status}</span></a></li>
+        <li><a>domains</a></li>
+        <li><a>pathways</a></li>
+        <li><a>species</a></li>
       </ul>
     </li>
   )
