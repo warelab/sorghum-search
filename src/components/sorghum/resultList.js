@@ -1,26 +1,6 @@
 import { connect } from 'redux-bundler-preact'
 import { h } from 'preact'
 
-// const ResultsList = ({sorghumPosts}) => (
-//   <div id="sorghum" class="pt50 row">
-//     <div class="col">
-//       <div>
-//         {!sorghumPosts && (
-//           <pre>searching</pre>
-//         )}
-//         {sorghumPosts && (
-//           <code>{JSON.stringify(sorghumPosts)}</code>
-//         )}
-//       </div>
-//     </div>
-//   </div>
-// )
-//
-// export default connect(
-//   'selectSorghumPosts',
-//   ResultsList
-// )
-
 const Posts = results => {
   if (results && results.numFound > 0) {
     return (
@@ -35,7 +15,7 @@ const Posts = results => {
                 <h4 class="card-title">
                   {doc.title.rendered}
                 </h4>
-                <p class="card-text">{doc.excerpt.rendered}</p>
+                <p class="card-text" dangerouslySetInnerHTML={{__html: doc.excerpt.rendered}} />
                 <a href={`/post/${doc.slug}`} class="btn btn-primary">read more</a>
               </div>
             </div>
@@ -161,7 +141,7 @@ const Papers = results => {
                 <h3 class="card-title">
                   {doc.paper_title}
                 </h3>
-                <p class="card-text">{doc.paper_authors}</p>
+                <p class="card-text" dangerouslySetInnerHTML={{__html: doc.paper_authors}}/>
                 <a href={doc.source_url} class="btn btn-primary">read more</a>
               </div>
             </div>
