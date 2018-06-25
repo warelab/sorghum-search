@@ -1,8 +1,10 @@
 import { render } from 'preact'
 import getStore from './bundles'
-import summary from './components/summary'
-import results from './components/results'
+import Summary from './components/summary'
+import Results from './components/results'
+import SearchBox from './components/searchbox'
 
 const store = getStore()
-render(summary(store), document.getElementById('search-summary'));
-render(results(store), document.getElementById('search-results'));
+render(Summary(store), document.getElementById('search-summary'));
+render(Results(store), document.getElementById('search-results'));
+render(SearchBox(store), document.getElementById('search-box'));
