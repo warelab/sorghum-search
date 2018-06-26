@@ -15,10 +15,19 @@ const getStatus = (cat,results) => {
   }
 };
 
+const total = (...args) => {
+  let sum = 0;
+  args.forEach(type => {
+    if (type) sum += type.numFound
+  });
+  if (sum > 0) return sum;
+  return <img src="//brie6:8081/static/images/dna_spinner.svg" />
+};
+
 const ResultSummary = ({sorghumPosts, sorghumEvents, sorghumJobs, sorghumPeople, sorghumLinks, sorghumPapers}) => (
   <li class="active">
     <a href="#sorghum" data-scroll="" class="nav-link active">
-      Sorghum CMS
+      Sorghum CMS<span style="float:right;">{total(sorghumPosts, sorghumEvents, sorghumJobs, sorghumPeople, sorghumLinks, sorghumPapers)}</span>
     </a>
     <ul class="list-unstyled categories">
       <li>{getStatus('Posts',sorghumPosts)}</li>
