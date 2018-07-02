@@ -5,7 +5,7 @@ import Gramene from './gramene/resultSummary'
 
 export default (store) => (
   <Provider store={store}>
-    <ul class="list-unstyled categories">
+    <ul class="list-unstyled category">
       <Sorghum />
       <Gramene />
     </ul>

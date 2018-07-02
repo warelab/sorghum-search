@@ -9,7 +9,7 @@ const ResultsList = ({grameneGenes}) => (
           <pre>searching</pre>
         )}
         {grameneGenes && (
-          <code>{JSON.stringify(grameneGenes)}</code>
+          <code>render the genes here</code>
         )}
       </div>
     </div>
