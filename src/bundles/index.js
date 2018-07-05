@@ -12,25 +12,38 @@ const UIbundle = {
   name: 'searchUI',
   getReducer: () => {
     const initialState = {
-      showSorghum: true,
-      showGramene: true
+      sorghumbase: true,
+      Posts: true,
+      Events: true,
+      Jobs: true,
+      People: true,
+      Links: true,
+      Papers: true,
+      updates: 1,
+      Gramene: true,
+      Genes: true,
+      Domains: false,
+      Pathways: false,
+      Species: false
     };
     return (state = initialState, {type, payload}) => {
-      if (type === 'SHOW_SORGHUM_TOGGLED') {
-        return Object.assign(state,{
-          showSorghum: !state.showSorghum
-        })
-      }
       if (type === 'SHOW_GRAMENE_TOGGLED') {
         return Object.assign(state,{
           showGramene: !state.showGramene
         })
       }
+      if (type === 'CATEGORY_TOGGLED') {
+        let update = {
+          updates: state.updates + 1
+        };
+        update[payload] = !state[payload];
+        return Object.assign(state, update)
+      }
       return state
     }
   },
-  doToggleShowSorghum: x => ({dispatch}) => {
-    dispatch({type: 'SHOW_SORGHUM_TOGGLED'})
+  doToggleCategory: cat => ({dispatch}) => {
+    dispatch({type: 'CATEGORY_TOGGLED', payload: cat})
   },
   doToggleShowGramene: x=> ({dispatch}) => {
     dispatch({type: 'SHOW_GRAMENE_TOGGLED'})
@@ -54,7 +67,8 @@ const UIbundle = {
       ]
     });
   },
-  selectShowSorghum: state => state.searchUI.showSorghum,
+  selectSearchUI: state => state.searchUI,
+  selectSearchUpdated: state => state.searchUI.updates,
   selectShowGramene: state => state.searchUI.showGramene
 };
 

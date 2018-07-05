@@ -1,20 +1,6 @@
 import {connect} from 'redux-bundler-preact'
 import {h} from 'preact'
-
-const getStatus = (cat,results) => {
-  const style = cat === 'Posts' ? 'category-checked' : 'category-not-checked';
-  if (results) {
-    if (results.numFound > 0) {
-      return <li className={style}><a href="#" data-scroll="">{cat}<span style="float:right;">{results.numFound}</span></a></li>;
-    }
-    else {
-      return <li className={style}><a href="#">{cat}<span style="float:right;">{results.numFound}</span></a></li>
-    }
-  }
-  else {
-    return <li className={style}><a href="#">{cat}<span style="float:right;"><img src="//brie6:8081/static/images/dna_spinner.svg" /></span></a></li>
-  }
-};
+import {getStatus} from '../utils'
 
 const total = (...args) => {
   let sum = 0;
@@ -24,28 +10,33 @@ const total = (...args) => {
     else done = false
   });
   if (sum > 0 || done) return sum;
-  return <img src="//brie6.cshl.edu:8081/static/images/dna_spinner.svg" />
+  return <img src="//brie6.cshl.edu:8081/static/images/dna_spinner.svg"/>
 };
 
-const ResultSummary = ({sorghumPosts, sorghumEvents, sorghumJobs, sorghumPeople, sorghumLinks, sorghumPapers, showSorghum, doToggleShowSorghum}) => {
-  if (showSorghum) return (
+const ResultSummary = ({
+                         sorghumPosts, sorghumEvents, sorghumJobs,
+                         sorghumPeople, sorghumLinks, sorghumPapers,
+                         searchUI, searchUpdated, doToggleCategory
+                       }) => {
+  if (searchUI.sorghumbase) return (
     <li className="active category-expanded">
-      <a onClick={e => doToggleShowSorghum()}>
-        Sorghumbase<span style="float:right;">{total(sorghumPosts, sorghumEvents, sorghumJobs, sorghumPeople, sorghumLinks, sorghumPapers)}</span>
+      <a onClick={e => doToggleCategory('sorghumbase')}>
+        Sorghumbase<span
+        style="float:right;">{total(sorghumPosts, sorghumEvents, sorghumJobs, sorghumPeople, sorghumLinks, sorghumPapers)}</span>
       </a>
       <ul className="list-unstyled">
-        <li className="category-checked">{getStatus('Posts',sorghumPosts)}</li>
-        <li className="category-checked">{getStatus('Events',sorghumEvents)}</li>
-        <li className="category-checked">{getStatus('Jobs',sorghumJobs)}</li>
-        <li>{getStatus('People',sorghumPeople)}</li>
-        <li>{getStatus('Links',sorghumLinks)}</li>
-        <li>{getStatus('Papers',sorghumPapers)}</li>
+        {getStatus('Posts', sorghumPosts, searchUI.Posts, doToggleCategory)}
+        {getStatus('Events', sorghumEvents, searchUI.Events, doToggleCategory)}
+        {getStatus('Jobs', sorghumJobs, searchUI.Jobs, doToggleCategory)}
+        {getStatus('People', sorghumPeople, searchUI.People, doToggleCategory)}
+        {getStatus('Links', sorghumLinks, searchUI.Links, doToggleCategory)}
+        {getStatus('Papers', sorghumPapers, searchUI.Papers, doToggleCategory)}
       </ul>
     </li>
   );
   else return (
     <li className="active category-collapsed">
-      <a onClick={e => doToggleShowSorghum()}>
+      <a onClick={e => doToggleCategory('sorghumbase')}>
         Sorghumbase<span
         style="float:right;">{total(sorghumPosts, sorghumEvents, sorghumJobs, sorghumPeople, sorghumLinks, sorghumPapers)}</span>
       </a>
@@ -61,7 +52,8 @@ export default connect(
   'selectSorghumPeople',
   'selectSorghumLinks',
   'selectSorghumPapers',
-  'selectShowSorghum',
-  'doToggleShowSorghum',
+  'selectSearchUI',
+  'selectSearchUpdated',
+  'doToggleCategory',
   ResultSummary
 )

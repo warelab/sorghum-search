@@ -1,5 +1,5 @@
-import { connect } from 'redux-bundler-preact'
-import { h } from 'preact'
+import {connect} from 'redux-bundler-preact'
+import {h} from 'preact'
 
 const Posts = results => {
   if (results && results.numFound > 0) {
@@ -15,7 +15,7 @@ const Posts = results => {
                 <h4 class="card-title">
                   {doc.title.rendered}
                 </h4>
-                <p class="card-text" dangerouslySetInnerHTML={{__html: doc.excerpt.rendered}} />
+                <p class="card-text" dangerouslySetInnerHTML={{__html: doc.excerpt.rendered}}/>
                 <a href={`/post/${doc.slug}`} class="btn btn-primary">read more</a>
               </div>
             </div>
@@ -41,7 +41,7 @@ const Events = results => {
                   {doc.title.rendered}
                 </h4>
                 <p class="card-text">{doc.start_date}</p>
-                <p class="card-text" dangerouslySetInnerHTML={{__html: doc.content.rendered}} />
+                <p class="card-text" dangerouslySetInnerHTML={{__html: doc.content.rendered}}/>
                 <a href={`/events#${doc.title.rendered}`} class="btn btn-primary">read more</a>
               </div>
             </div>
@@ -67,7 +67,7 @@ const Jobs = results => {
                   {doc.title.rendered}
                 </h4>
                 <p class="card-text">{doc.company}</p>
-                <p class="card-text" dangerouslySetInnerHTML={{__html: doc.content.rendered}} />
+                <p class="card-text" dangerouslySetInnerHTML={{__html: doc.content.rendered}}/>
                 <a href={doc.job_url} class="btn btn-primary">read more</a>
               </div>
             </div>
@@ -116,7 +116,7 @@ const Links = results => {
                 <h4 class="card-title">
                   {doc.title.rendered}
                 </h4>
-                <p class="card-text" dangerouslySetInnerHTML={{__html: doc.content.rendered}} />
+                <p class="card-text" dangerouslySetInnerHTML={{__html: doc.content.rendered}}/>
                 <a href={doc.resource_url} class="btn btn-primary">read more</a>
               </div>
             </div>
@@ -152,14 +152,17 @@ const Papers = results => {
   }
 };
 
-const ResultsList = ({sorghumPosts, sorghumEvents, sorghumJobs, sorghumPeople, sorghumLinks, sorghumPapers}) => (
+const ResultsList = ({
+                       sorghumPosts, sorghumEvents, sorghumJobs, sorghumPeople, sorghumLinks, sorghumPapers,
+                       searchUI, searchUpdated
+                     }) => (
   <div id="sorghum" class="pt50 row">
-    {Posts(sorghumPosts)}
-    {Events(sorghumEvents)}
-    {Jobs(sorghumJobs)}
-    {People(sorghumPeople)}
-    {Links(sorghumLinks)}
-    {Papers(sorghumPapers)}
+    {searchUI.Posts && Posts(sorghumPosts)}
+    {searchUI.Events && Events(sorghumEvents)}
+    {searchUI.Jobs && Jobs(sorghumJobs)}
+    {searchUI.People && People(sorghumPeople)}
+    {searchUI.Links && Links(sorghumLinks)}
+    {searchUI.Papers && Papers(sorghumPapers)}
   </div>
 );
 
@@ -171,5 +174,7 @@ export default connect(
   'selectSorghumPeople',
   'selectSorghumLinks',
   'selectSorghumPapers',
+  'selectSearchUI',
+  'selectSearchUpdated',
   ResultsList
 )

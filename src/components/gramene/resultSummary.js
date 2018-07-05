@@ -1,26 +1,28 @@
 import { connect } from 'redux-bundler-preact'
 import { h } from 'preact'
+import {getStatus} from '../utils'
 
-const ResultSummary = ({grameneGenes, showGramene, doToggleShowGramene}) => {
-  const status = grameneGenes
-    ? grameneGenes.response.numFound
-    : <img src="//brie6:8081/static/images/dna_spinner.svg" />;
-  if (showGramene) return (
+
+const ResultSummary = ({grameneGenes, gramenePathways, grameneDomains, grameneTaxonomy, searchUI, searchUpdated, doToggleCategory}) => {
+  const status = grameneGenes ?
+    grameneGenes.numFound:
+    <img src="//brie6:8081/static/images/dna_spinner.svg"/>;
+  if (searchUI.Gramene) return (
     <li className="active category-expanded">
-      <a onClick={e => doToggleShowGramene()}>
+      <a onClick={e => doToggleCategory('Gramene')}>
         Gramene Search<span style="float:right;">{status}</span>
       </a>
-      <ul className="list-unstyled category-leaf">
-        <li><a href="#gramene">Genes<span style="float:right;">{status}</span></a></li>
-        <li><a>domains</a></li>
-        <li><a>pathways</a></li>
-        <li><a>species</a></li>
+      <ul className="list-unstyled">
+        {getStatus('Genes', grameneGenes, searchUI.Genes, doToggleCategory)}
+        {getStatus('Domains', grameneDomains, searchUI.Domains, doToggleCategory)}
+        {getStatus('Pathways', gramenePathways, searchUI.Pathways, doToggleCategory)}
+        {getStatus('Species', grameneTaxonomy, searchUI.Species, doToggleCategory)}
       </ul>
     </li>
   );
-  return (
+  else return (
     <li className="active category-collapsed">
-      <a onClick={e => doToggleShowGramene()}>
+      <a onClick={e => doToggleCategory('Gramene')}>
         Gramene Search<span
         style="float:right;">{status}</span>
       </a>
@@ -30,7 +32,11 @@ const ResultSummary = ({grameneGenes, showGramene, doToggleShowGramene}) => {
 
 export default connect(
   'selectGrameneGenes',
-  'selectShowGramene',
-  'doToggleShowGramene',
+  'selectGramenePathways',
+  'selectGrameneDomains',
+  'selectGrameneTaxonomy',
+  'selectSearchUI',
+  'selectSearchUpdated',
+  'doToggleCategory',
   ResultSummary
 )

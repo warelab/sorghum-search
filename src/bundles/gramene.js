@@ -13,6 +13,7 @@ const grameneGenes = createAsyncResourceBundle({
   getPromise: ({store}) =>
     fetch(`http://data.gramene.org/search?${store.selectQueryString()}&facet.field=${facets}`)
       .then(res => res.json())
+      .then(solr => {console.log(solr); solr.numFound = solr.response.numFound; return solr})
 });
 
 grameneGenes.reactGrameneGenes = createSelector(
@@ -85,6 +86,7 @@ const grameneDomains = createAsyncResourceBundle({
   getPromise: ({store}) =>
     fetch(`http://data.gramene.org/domains?idList=${store.selectDomainFacets().join(',')}`)
       .then(res => res.json())
+      .then(docs => {return {domains: docs, numFound: docs.length}})
 });
 
 const gramenePathways = createAsyncResourceBundle({
@@ -93,6 +95,7 @@ const gramenePathways = createAsyncResourceBundle({
   getPromise: ({store}) =>
     fetch(`http://data.gramene.org/pathways?idList=${store.selectPathwayFacets().join(',')}`)
       .then(res => res.json())
+      .then(docs => {return {pathways: docs, numFound: docs.length}})
 });
 
 const grameneTaxonomy = createAsyncResourceBundle({
@@ -101,6 +104,7 @@ const grameneTaxonomy = createAsyncResourceBundle({
   getPromise: ({store}) =>
     fetch(`http://data.gramene.org/taxonomy?idList=${store.selectTaxonomyFacets().join(',')}`)
       .then(res => res.json())
+      .then(docs => {return {taxonomy: docs, numFound: docs.length}})
 });
 
 export default [grameneGenes, grameneDomains, gramenePathways, grameneTaxonomy]
