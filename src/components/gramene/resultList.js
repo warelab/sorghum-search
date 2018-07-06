@@ -2,16 +2,16 @@ import { connect } from 'redux-bundler-preact'
 import { h } from 'preact'
 
 const Genes = results => (
-  <p>show Genes here</p>
+  <p id="Genes">show Genes here</p>
 );
 const Pathways = results => (
-  <p>show Pathways here</p>
+  <p id="Pathways">show Pathways here</p>
 );
 const Domains = results => (
-  <p>show Domains here</p>
+  <p id="Domains">show Domains here</p>
 );
 const Species = results => (
-  <p>show Species here</p>
+  <p id="Species">show Species here</p>
 );
 
 const ResultsList = ({grameneGenes, grameneDomains, gramenePathways, grameneTaxonomy, searchUI, searchUpdated}) => (

@@ -6,7 +6,7 @@ import {getStatus} from '../utils'
 const ResultSummary = ({grameneGenes, gramenePathways, grameneDomains, grameneTaxonomy, searchUI, searchUpdated, doToggleCategory}) => {
   const status = grameneGenes ?
     grameneGenes.numFound:
-    <img src="//brie6:8081/static/images/dna_spinner.svg"/>;
+    <img src="/static/images/dna_spinner.svg"/>;
   if (searchUI.Gramene) return (
     <li className="active category-expanded">
       <a onClick={e => doToggleCategory('Gramene')}>

@@ -1,7 +1,7 @@
 import {createAsyncResourceBundle, createSelector} from 'redux-bundler'
-const API = 'http://brie6:8081/search_api';
+//const API = 'http://brie6:8081/search_api';
 // const API = 'http://localhost:5000/search_api';
-
+const API = '/search_api';
 const sorghumPosts = createAsyncResourceBundle({
   name: 'sorghumPosts',
   actionBaseType: 'SORGHUM_POSTS',
