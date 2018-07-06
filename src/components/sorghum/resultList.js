@@ -156,13 +156,13 @@ const ResultsList = ({
                        sorghumPosts, sorghumEvents, sorghumJobs, sorghumPeople, sorghumLinks, sorghumPapers,
                        searchUI, searchUpdated
                      }) => (
-  <div id="sorghum" className="pt50 row">
-    {searchUI.Posts && Posts(sorghumPosts)}
-    {searchUI.Events && Events(sorghumEvents)}
-    {searchUI.Jobs && Jobs(sorghumJobs)}
-    {searchUI.People && People(sorghumPeople)}
-    {searchUI.Links && Links(sorghumLinks)}
-    {searchUI.Papers && Papers(sorghumPapers)}
+  <div id="sorghum" className="row">
+    {searchUI.sorghumbase && searchUI.Posts && Posts(sorghumPosts)}
+    {searchUI.sorghumbase && searchUI.Events && Events(sorghumEvents)}
+    {searchUI.sorghumbase && searchUI.Jobs && Jobs(sorghumJobs)}
+    {searchUI.sorghumbase && searchUI.People && People(sorghumPeople)}
+    {searchUI.sorghumbase && searchUI.Links && Links(sorghumLinks)}
+    {searchUI.sorghumbase && searchUI.Papers && Papers(sorghumPapers)}
   </div>
 );
 

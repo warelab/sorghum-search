@@ -18,10 +18,10 @@ const ResultsList = ({grameneGenes, grameneDomains, gramenePathways, grameneTaxo
   <div id="gramene" class="pt50 row">
     <div class="col">
       <div>
-        {searchUI.Genes && Genes(grameneGenes)}
-        {searchUI.Domains && Domains(grameneDomains)}
-        {searchUI.Pathways && Pathways(gramenePathways)}
-        {searchUI.Species && Species(grameneTaxonomy)}
+        {searchUI.Gramene && searchUI.Genes && Genes(grameneGenes)}
+        {searchUI.Gramene && searchUI.Domains && Domains(grameneDomains)}
+        {searchUI.Gramene && searchUI.Pathways && Pathways(gramenePathways)}
+        {searchUI.Gramene && searchUI.Species && Species(grameneTaxonomy)}
       </div>
     </div>
   </div>
