@@ -1,5 +1,6 @@
 import {connect} from 'redux-bundler-preact'
 import {h} from 'preact'
+import {stripImages} from '../utils'
 
 const Posts = results => {
   if (results && results.numFound > 0) {
@@ -15,7 +16,7 @@ const Posts = results => {
                 <h4 className="card-title">
                   {doc.title.rendered}
                 </h4>
-                <p className="card-text" dangerouslySetInnerHTML={{__html: doc.excerpt.rendered}}/>
+                <p className="card-text" dangerouslySetInnerHTML={{__html: stripImages(doc.excerpt.rendered)}}/>
                 <a href={`/post/${doc.slug}`} className="btn btn-primary">read more</a>
               </div>
             </div>
@@ -40,15 +41,9 @@ const Events = results => {
                 <h4 className="card-title">
                   {doc.title.rendered}
                 </h4>
-<<<<<<< HEAD
                 <p class="card-text">{doc.start_date}</p>
-                <p class="card-text" dangerouslySetInnerHTML={{__html: doc.content.rendered}}/>
+                <p class="card-text" dangerouslySetInnerHTML={{__html: stripImages(doc.content.rendered)}}/>
                 <a href={`/events#${doc.title.rendered}`} class="btn btn-primary">view event</a>
-=======
-                <p className="card-text">{doc.start_date}</p>
-                <p className="card-text" dangerouslySetInnerHTML={{__html: doc.content.rendered}}/>
-                <a href={`/events#${doc.title.rendered}`} className="btn btn-primary">read more</a>
->>>>>>> 78adf26ad596b7203de70d96e083f9d2e1c7dc9d
               </div>
             </div>
           ))}
@@ -72,15 +67,9 @@ const Jobs = results => {
                 <h4 className="card-title">
                   {doc.title.rendered}
                 </h4>
-<<<<<<< HEAD
                 <p class="card-text">{doc.company}</p>
-                <p class="card-text" dangerouslySetInnerHTML={{__html: doc.content.rendered}}/>
+                <p class="card-text" dangerouslySetInnerHTML={{__html: stripImages(doc.content.rendered)}}/>
                 <a href={doc.job_url} class="btn btn-primary">view job posting</a>
-=======
-                <p className="card-text">{doc.company}</p>
-                <p className="card-text" dangerouslySetInnerHTML={{__html: doc.content.rendered}}/>
-                <a href={doc.job_url} className="btn btn-primary">read more</a>
->>>>>>> 78adf26ad596b7203de70d96e083f9d2e1c7dc9d
               </div>
             </div>
           ))}
@@ -128,7 +117,7 @@ const Links = results => {
                 <h4 className="card-title">
                   {doc.title.rendered}
                 </h4>
-                <p class="card-text" dangerouslySetInnerHTML={{__html: doc.content.rendered}}/>
+                <p class="card-text" dangerouslySetInnerHTML={{__html: stripImages(doc.content.rendered)}}/>
                 <a href={doc.resource_url} class="btn btn-primary">Visit resource</a>
               </div>
             </div>

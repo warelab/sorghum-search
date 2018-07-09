@@ -10,3 +10,7 @@ export const getStatus = (cat, results, isChecked, toggle) => {
     </li>
   )
 };
+
+export const stripImages = (text) => {
+  return text.replace(/<figure.*figure>/, ' ')
+}
