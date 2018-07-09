@@ -42,7 +42,7 @@ const Events = results => {
                 </h4>
                 <p class="card-text">{doc.start_date}</p>
                 <p class="card-text" dangerouslySetInnerHTML={{__html: doc.content.rendered}}/>
-                <a href={`/events#${doc.title.rendered}`} class="btn btn-primary">read more</a>
+                <a href={`/events#${doc.title.rendered}`} class="btn btn-primary">view event</a>
               </div>
             </div>
           ))}
@@ -68,7 +68,7 @@ const Jobs = results => {
                 </h4>
                 <p class="card-text">{doc.company}</p>
                 <p class="card-text" dangerouslySetInnerHTML={{__html: doc.content.rendered}}/>
-                <a href={doc.job_url} class="btn btn-primary">read more</a>
+                <a href={doc.job_url} class="btn btn-primary">view job posting</a>
               </div>
             </div>
           ))}
@@ -117,7 +117,7 @@ const Links = results => {
                   {doc.title.rendered}
                 </h4>
                 <p class="card-text" dangerouslySetInnerHTML={{__html: doc.content.rendered}}/>
-                <a href={doc.resource_url} class="btn btn-primary">read more</a>
+                <a href={doc.resource_url} class="btn btn-primary">Visit resource</a>
               </div>
             </div>
           ))}
