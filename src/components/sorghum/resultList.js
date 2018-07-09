@@ -4,19 +4,19 @@ import {h} from 'preact'
 const Posts = results => {
   if (results && results.numFound > 0) {
     return (
-      <div id="sorghumPosts" class="container mb40">
-        <div class="fancy-title mb40">
+      <div id="Posts" className="container mb40 pt90">
+        <div className="fancy-title mb40">
           <h4>Posts</h4>
         </div>
-        <div class="row">
+        <div className="row">
           {results.docs.map(doc => (
-            <div class="col-md-4 mb30">
-              <div class="card card-body">
-                <h4 class="card-title">
+            <div className="col-md-4 mb30">
+              <div className="card card-body">
+                <h4 className="card-title">
                   {doc.title.rendered}
                 </h4>
-                <p class="card-text" dangerouslySetInnerHTML={{__html: doc.excerpt.rendered}}/>
-                <a href={`/post/${doc.slug}`} class="btn btn-primary">read more</a>
+                <p className="card-text" dangerouslySetInnerHTML={{__html: doc.excerpt.rendered}}/>
+                <a href={`/post/${doc.slug}`} className="btn btn-primary">read more</a>
               </div>
             </div>
           ))}
@@ -29,20 +29,26 @@ const Posts = results => {
 const Events = results => {
   if (results && results.numFound > 0) {
     return (
-      <div id="sorghumEvents" class="container mb40">
-        <div class="fancy-title mb40">
+      <div id="Events" className="container mb40 pt90">
+        <div className="fancy-title mb40">
           <h4>Events</h4>
         </div>
-        <div class="row">
+        <div className="row">
           {results.docs.map(doc => (
-            <div class="col-md-4 mb30">
-              <div class="card card-body">
-                <h4 class="card-title">
+            <div className="col-md-4 mb30">
+              <div className="card card-body">
+                <h4 className="card-title">
                   {doc.title.rendered}
                 </h4>
+<<<<<<< HEAD
                 <p class="card-text">{doc.start_date}</p>
                 <p class="card-text" dangerouslySetInnerHTML={{__html: doc.content.rendered}}/>
                 <a href={`/events#${doc.title.rendered}`} class="btn btn-primary">view event</a>
+=======
+                <p className="card-text">{doc.start_date}</p>
+                <p className="card-text" dangerouslySetInnerHTML={{__html: doc.content.rendered}}/>
+                <a href={`/events#${doc.title.rendered}`} className="btn btn-primary">read more</a>
+>>>>>>> 78adf26ad596b7203de70d96e083f9d2e1c7dc9d
               </div>
             </div>
           ))}
@@ -55,20 +61,26 @@ const Events = results => {
 const Jobs = results => {
   if (results && results.numFound > 0) {
     return (
-      <div id="sorghumJobs" class="container mb40">
-        <div class="fancy-title mb40">
+      <div id="Jobs" className="container mb40 pt90">
+        <div className="fancy-title mb40">
           <h4>Jobs</h4>
         </div>
-        <div class="row">
+        <div className="row">
           {results.docs.map(doc => (
-            <div class="col-md-4 mb30">
-              <div class="card card-body">
-                <h4 class="card-title">
+            <div className="col-md-4 mb30">
+              <div className="card card-body">
+                <h4 className="card-title">
                   {doc.title.rendered}
                 </h4>
+<<<<<<< HEAD
                 <p class="card-text">{doc.company}</p>
                 <p class="card-text" dangerouslySetInnerHTML={{__html: doc.content.rendered}}/>
                 <a href={doc.job_url} class="btn btn-primary">view job posting</a>
+=======
+                <p className="card-text">{doc.company}</p>
+                <p className="card-text" dangerouslySetInnerHTML={{__html: doc.content.rendered}}/>
+                <a href={doc.job_url} className="btn btn-primary">read more</a>
+>>>>>>> 78adf26ad596b7203de70d96e083f9d2e1c7dc9d
               </div>
             </div>
           ))}
@@ -81,18 +93,18 @@ const Jobs = results => {
 const People = results => {
   if (results && results.numFound > 0) {
     return (
-      <div id="sorghumPeople" class="container mb40">
-        <div class="fancy-title mb40">
+      <div id="People" className="container mb40 pt90">
+        <div className="fancy-title mb40">
           <h4>People</h4>
         </div>
-        <div class="row">
+        <div className="row">
           {results.docs.map(doc => (
-            <div class="col-md-4 mb30">
-              <div class="card card-body">
-                <h4 class="card-title">
-                  <img src={doc.avatar_urls[96]} class="img-fluid rounded-circle centered"/>
+            <div className="col-md-4 mb30">
+              <div className="card card-body">
+                <h4 className="card-title">
+                  <img src={doc.avatar_urls[96]} className="img-fluid rounded-circle centered"/>
                 </h4>
-                <p class="card-text text-center">{doc.name}</p>
+                <p className="card-text text-center">{doc.name}</p>
               </div>
             </div>
           ))}
@@ -105,15 +117,15 @@ const People = results => {
 const Links = results => {
   if (results && results.numFound > 0) {
     return (
-      <div id="sorghumLinks" class="container mb40">
-        <div class="fancy-title mb40">
+      <div id="Links" className="container mb40 pt90">
+        <div className="fancy-title mb40">
           <h4>Resource Links</h4>
         </div>
-        <div class="row">
+        <div className="row">
           {results.docs.map(doc => (
-            <div class="col-md-4 mb30">
-              <div class="card card-body">
-                <h4 class="card-title">
+            <div className="col-md-4 mb30">
+              <div className="card card-body">
+                <h4 className="card-title">
                   {doc.title.rendered}
                 </h4>
                 <p class="card-text" dangerouslySetInnerHTML={{__html: doc.content.rendered}}/>
@@ -130,19 +142,19 @@ const Links = results => {
 const Papers = results => {
   if (results && results.numFound > 0) {
     return (
-      <div id="sorghumPapers" class="container mb40">
-        <div class="fancy-title mb40">
+      <div id="Papers" className="container mb40 pt90">
+        <div className="fancy-title mb40">
           <h4>Research Papers</h4>
         </div>
-        <div class="row">
+        <div className="row">
           {results.docs.map(doc => (
-            <div class="card card-inverse bg-dark mb30">
-              <div class="card-body">
-                <h3 class="card-title">
+            <div className="card card-inverse bg-dark mb30">
+              <div className="card-body">
+                <h3 className="card-title">
                   {doc.title.rendered}
                 </h3>
-                <p class="card-text" dangerouslySetInnerHTML={{__html: doc.paper_authors}}/>
-                <a href={doc.source_url} class="btn btn-primary">read more</a>
+                <p className="card-text" dangerouslySetInnerHTML={{__html: doc.paper_authors}}/>
+                <a href={doc.source_url} className="btn btn-primary">read more</a>
               </div>
             </div>
           ))}
@@ -156,13 +168,13 @@ const ResultsList = ({
                        sorghumPosts, sorghumEvents, sorghumJobs, sorghumPeople, sorghumLinks, sorghumPapers,
                        searchUI, searchUpdated
                      }) => (
-  <div id="sorghum" class="pt50 row">
-    {searchUI.Posts && Posts(sorghumPosts)}
-    {searchUI.Events && Events(sorghumEvents)}
-    {searchUI.Jobs && Jobs(sorghumJobs)}
-    {searchUI.People && People(sorghumPeople)}
-    {searchUI.Links && Links(sorghumLinks)}
-    {searchUI.Papers && Papers(sorghumPapers)}
+  <div id="sorghum" className="row">
+    {searchUI.sorghumbase && searchUI.Posts && Posts(sorghumPosts)}
+    {searchUI.sorghumbase && searchUI.Events && Events(sorghumEvents)}
+    {searchUI.sorghumbase && searchUI.Jobs && Jobs(sorghumJobs)}
+    {searchUI.sorghumbase && searchUI.People && People(sorghumPeople)}
+    {searchUI.sorghumbase && searchUI.Links && Links(sorghumLinks)}
+    {searchUI.sorghumbase && searchUI.Papers && Papers(sorghumPapers)}
   </div>
 );
 

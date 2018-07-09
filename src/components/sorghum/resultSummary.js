@@ -10,7 +10,7 @@ const total = (...args) => {
     else done = false
   });
   if (sum > 0 || done) return sum;
-  return <img src="//brie6.cshl.edu:8081/static/images/dna_spinner.svg"/>
+  return <img src="/static/images/dna_spinner.svg"/>
 };
 
 const ResultSummary = ({

@@ -84,7 +84,7 @@ const grameneDomains = createAsyncResourceBundle({
   name: 'grameneDomains',
   actionBaseType: 'GRAMENE_DOMAINS',
   getPromise: ({store}) =>
-    fetch(`http://data.gramene.org/domains?idList=${store.selectDomainFacets().join(',')}`)
+    fetch(`http://data.gramene.org/domains?rows=-1&idList=${store.selectDomainFacets().join(',')}`)
       .then(res => res.json())
       .then(docs => {return {domains: docs, numFound: docs.length}})
 });
@@ -93,7 +93,7 @@ const gramenePathways = createAsyncResourceBundle({
   name: 'gramenePathways',
   actionBaseType: 'GRAMENE_PATHWAYS',
   getPromise: ({store}) =>
-    fetch(`http://data.gramene.org/pathways?idList=${store.selectPathwayFacets().join(',')}`)
+    fetch(`http://data.gramene.org/pathways?rows=-1&idList=${store.selectPathwayFacets().join(',')}`)
       .then(res => res.json())
       .then(docs => {return {pathways: docs, numFound: docs.length}})
 });
@@ -102,7 +102,7 @@ const grameneTaxonomy = createAsyncResourceBundle({
   name: 'grameneTaxonomy',
   actionBaseType: 'GRAMENE_TAXONOMY',
   getPromise: ({store}) =>
-    fetch(`http://data.gramene.org/taxonomy?idList=${store.selectTaxonomyFacets().join(',')}`)
+    fetch(`http://data.gramene.org/taxonomy?rows=-1&idList=${store.selectTaxonomyFacets().join(',')}`)
       .then(res => res.json())
       .then(docs => {return {taxonomy: docs, numFound: docs.length}})
 });
