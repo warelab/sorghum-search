@@ -33,7 +33,7 @@ const Posts = results => {
 const Events = results => {
   if (results && results.numFound > 0) {
     return (
-      <div id="Events" className="container mb40 pt90">
+      <div id="Events" className="container mb40 anchor">
         <div className="fancy-title mb40">
           <h4>Events</h4>
         </div>
@@ -59,7 +59,7 @@ const Events = results => {
 const Jobs = results => {
   if (results && results.numFound > 0) {
     return (
-      <div id="Jobs" className="container mb40 pt90">
+      <div id="Jobs" className="container mb40 anchor">
         <div className="fancy-title mb40">
           <h4>Jobs</h4>
         </div>
@@ -85,7 +85,7 @@ const Jobs = results => {
 const People = results => {
   if (results && results.numFound > 0) {
     return (
-      <div id="People" className="container mb40 pt90">
+      <div id="People" className="container mb40 anchor">
         <div className="fancy-title mb40">
           <h4>People</h4>
         </div>
@@ -109,7 +109,7 @@ const People = results => {
 const Links = results => {
   if (results && results.numFound > 0) {
     return (
-      <div id="Links" className="container mb40 pt90">
+      <div id="Links" className="container mb40 anchor">
         <div className="fancy-title mb40">
           <h4>Resource Links</h4>
         </div>
@@ -134,7 +134,7 @@ const Links = results => {
 const Papers = results => {
   if (results && results.numFound > 0) {
     return (
-      <div id="Papers" className="container mb40 pt90">
+      <div id="Papers" className="container mb40 anchor">
         <div className="fancy-title mb40">
           <h4>Research Papers</h4>
         </div>
