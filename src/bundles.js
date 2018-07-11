@@ -112,6 +112,4 @@ sorghumPapers.reactSorghumPapers = createSelector(
   }
 );
 
-const bundles = [sorghumPosts, sorghumLinks, sorghumPeople, sorghumJobs, sorghumEvents, sorghumPapers];
-
-export { bundles };
+export default [sorghumPosts, sorghumLinks, sorghumPeople, sorghumJobs, sorghumEvents, sorghumPapers];

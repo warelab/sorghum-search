@@ -24,7 +24,7 @@ const total = (...args) => {
   return spinner;
 };
 
-const ResultSummaryCmp = ({
+const ResultSummary = ({
                          sorghumPosts, sorghumEvents, sorghumJobs,
                          sorghumPeople, sorghumLinks, sorghumPapers,
                          searchUI, searchUpdated, doToggleCategory
@@ -56,7 +56,7 @@ const ResultSummaryCmp = ({
 };
 
 
-const ResultSummary = connect(
+export default connect(
   'selectSorghumPosts',
   'selectSorghumEvents',
   'selectSorghumJobs',
@@ -66,7 +66,5 @@ const ResultSummary = connect(
   'selectSearchUI',
   'selectSearchUpdated',
   'doToggleCategory',
-  ResultSummaryCmp
+  ResultSummary
 );
-
-export { ResultSummary };

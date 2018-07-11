@@ -1,3 +1,8 @@
-export { bundles } from './bundles';
-export { ResultList } from './resultList';
-export { ResultSummary } from './resultSummary';
+import sorghumBundles from './bundles';
+import ResultList from './resultList';
+import ResultSummary from './resultSummary';
+
+export const bundles = sorghumBundles;
+export const resultList = ResultList;
+export const resultSummary = ResultSummary;
+
