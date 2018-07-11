@@ -156,7 +156,7 @@ const Papers = results => {
   }
 };
 
-const ResultsListCmp = ({
+const ResultListCmp = ({
                        sorghumPosts, sorghumEvents, sorghumJobs, sorghumPeople, sorghumLinks, sorghumPapers,
                        searchUI, searchUpdated
                      }) => (
@@ -171,7 +171,7 @@ const ResultsListCmp = ({
 );
 
 
-const ResultsList = connect(
+const ResultList = connect(
   'selectSorghumPosts',
   'selectSorghumEvents',
   'selectSorghumJobs',
@@ -180,7 +180,7 @@ const ResultsList = connect(
   'selectSorghumPapers',
   'selectSearchUI',
   'selectSearchUpdated',
-  ResultsListCmp
+  ResultListCmp
 );
 
-export { ResultsList };
+export { ResultList };
