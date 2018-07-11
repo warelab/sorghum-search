@@ -1,6 +1,9 @@
 import {connect} from 'redux-bundler-preact'
 import {h} from 'preact'
-import {stripImages} from '../utils'
+
+const stripImages = (text) => {
+  return text.replace(/<figure.*figure>/, ' ')
+};
 
 const Posts = results => {
   if (results && results.numFound > 0) {

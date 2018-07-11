@@ -1,6 +1,17 @@
 import {connect} from 'redux-bundler-preact'
 import {h} from 'preact'
-import {getStatus} from '../utils'
+const spinner = <img src="/static/images/dna_spinner.svg"/>;
+
+const getStatus = (cat, results, isChecked, toggle) => {
+  const style = isChecked ? 'category-checked' : 'category-not-checked';
+  const tally = results ? results.numFound : spinner;
+  return (
+    <li className='category-leaf'>
+      <input type="checkbox" checked={isChecked} onChange={e => toggle(cat)}/>
+      <a data-scroll href={`#${cat}`} className="nav-link active">{cat}<span style="float:right;">{tally}</span></a>
+    </li>
+  )
+};
 
 const total = (...args) => {
   let sum = 0;
@@ -10,7 +21,7 @@ const total = (...args) => {
     else done = false
   });
   if (sum > 0 || done) return sum;
-  return <img src="/static/images/dna_spinner.svg"/>
+  return spinner;
 };
 
 const ResultSummary = ({
