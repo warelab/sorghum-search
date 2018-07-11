@@ -4,7 +4,7 @@
   "description": "search wrapper for sorghumbase",
   "main": "src/index.js",
   "scripts": {
-    "build": "parcel build src/index.js",
+    "build": "parcel build src/index.js"
   },
   "bundlerOptions": {
     "babel": true
