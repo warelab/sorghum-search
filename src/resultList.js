@@ -78,21 +78,22 @@ const Paper = ({doc}) => (
   </div>
 );
 
-const ResultType = (cmp, id, label, results, doChangeQuantity) => {
-  if (results && results.numFound > 0) {
-    const moreButton = (results.numFound > results.docs.length)
-      ? <button onClick={e => doChangeQuantity(id,3)}>more</button>
+const ResultType = (cmp, id, label, results, searchUI, doChangeQuantity) => {
+  if (searchUI[id] && results && results.numFound > 0) {
+    const moreButton = (results.numFound > searchUI.rows[id])
+      ? <button onClick={e => doChangeQuantity(id,3)}>More</button>
       : '';
-    const fewerButton = (results.docs.length > 3)
-      ? <button onClick={e => doChangeQuantity(id,-3)}>fewer</button>
+    const fewerButton = (searchUI.rows[id] > 3)
+      ? <button onClick={e => doChangeQuantity(id,-3)}>Fewer</button>
       : '';
+    const docsToShow = results.docs.slice(0, searchUI.rows[id]);
     return (
       <div id={id} className="container mb40 anchor">
         <div className="fancy-title mb40">
           <h4>{label}</h4>
         </div>
         <div className="row">
-          {results.docs.map(doc => h(cmp,{doc}))}
+          {docsToShow.map(doc => h(cmp,{doc}))}
         </div>
         <div className="row">
           {fewerButton}{moreButton}
@@ -105,16 +106,20 @@ const ResultType = (cmp, id, label, results, doChangeQuantity) => {
 const ResultList = ({
                        sorghumPosts, sorghumEvents, sorghumJobs, sorghumPeople, sorghumLinks, sorghumPapers,
                        searchUI, searchUpdated, doChangeQuantity
-                     }) => (
-  <div id="sorghum" className="row">
-    {searchUI.sorghumbase && searchUI.Posts  && ResultType(Post,   'Posts',  'Blog/News',       sorghumPosts,  doChangeQuantity)}
-    {searchUI.sorghumbase && searchUI.Events && ResultType(Event,  'Events', 'Events',          sorghumEvents, doChangeQuantity)}
-    {searchUI.sorghumbase && searchUI.Jobs   && ResultType(Job,    'Jobs',   'Jobs',            sorghumJobs,   doChangeQuantity)}
-    {searchUI.sorghumbase && searchUI.People && ResultType(Person, 'People', 'People',          sorghumPeople, doChangeQuantity)}
-    {searchUI.sorghumbase && searchUI.Links  && ResultType(Link,   'Links',  'Resource Links',  sorghumLinks,  doChangeQuantity)}
-    {searchUI.sorghumbase && searchUI.Papers && ResultType(Paper,  'Papers', 'Research Papers', sorghumPapers, doChangeQuantity)}
-  </div>
-);
+                     }) => {
+  if (searchUI.sorghumbase) {
+    return (
+      <div id="sorghum" className="row">
+        {ResultType(Post,   'Posts',  'Blog/News',       sorghumPosts,  searchUI, doChangeQuantity)}
+        {ResultType(Event,  'Events', 'Events',          sorghumEvents, searchUI, doChangeQuantity)}
+        {ResultType(Job,    'Jobs',   'Jobs',            sorghumJobs,   searchUI, doChangeQuantity)}
+        {ResultType(Person, 'People', 'People',          sorghumPeople, searchUI, doChangeQuantity)}
+        {ResultType(Link,   'Links',  'Resource Links',  sorghumLinks,  searchUI, doChangeQuantity)}
+        {ResultType(Paper,  'Papers', 'Research Papers', sorghumPapers, searchUI, doChangeQuantity)}
+      </div>
+    );
+  }
+}
 
 
 export default connect(
