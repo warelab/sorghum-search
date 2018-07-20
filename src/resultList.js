@@ -110,6 +110,9 @@ const ResultList = ({
   if (searchUI.sorghumbase) {
     return (
       <div id="sorghum" className="row">
+        <div className="fancy-title pt50">
+          <h3>Sorghumbase search results</h3>
+        </div>
         {ResultType(Post,   'Posts',  'Blog/News',       sorghumPosts,  searchUI, doChangeQuantity)}
         {ResultType(Event,  'Events', 'Events',          sorghumEvents, searchUI, doChangeQuantity)}
         {ResultType(Job,    'Jobs',   'Jobs',            sorghumJobs,   searchUI, doChangeQuantity)}
