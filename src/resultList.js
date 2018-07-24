@@ -54,17 +54,20 @@ const Person = ({doc}) => (
   </div>
 );
 
-const Link = ({doc}) => (
-  <div className="col-md-4 mb30">
-    <div className="card card-body">
-      <h4 className="card-title">
-        {doc.title.rendered}
-      </h4>
-      <p class="card-text" dangerouslySetInnerHTML={{__html: stripImages(doc.content.rendered)}}/>
-      <a href={doc.resource_url} class="btn btn-primary">Visit resource</a>
+const defaultImg = "http://content.sorghumbase.org/wordpress/wp-content/uploads/2018/05/sorghum-grains_1920x1000.jpg";
+const Link = ({doc}) => {
+  const a_content = doc.resource_image
+    ? <img src={doc.resource_image[0].guid} style="width:100%; max-height: 150px;"/>
+    : <h4 dangerouslySetInnerHTML={{__html: doc.title.rendered}}/>;
+  return (
+    <div className="col-md-4 mb20 card">
+      <a href={doc.resource_url}>
+        {a_content}
+      </a>
+      <div className="card-body" dangerouslySetInnerHTML={{__html: stripImages(doc.content.rendered)}}/>
     </div>
-  </div>
-);
+  );
+};
 
 const Paper = ({doc}) => (
   <div className="card card-inverse bg-dark mb30">
@@ -92,7 +95,7 @@ const ResultType = (cmp, id, label, results, searchUI, doChangeQuantity) => {
         <div className="fancy-title mb40">
           <h4>{label}</h4>
         </div>
-        <div className="row">
+        <div className="row special-feature mb50">
           {docsToShow.map(doc => h(cmp,{doc}))}
         </div>
         <div className="row">
