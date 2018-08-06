@@ -60,11 +60,13 @@ const Link = ({doc}) => {
     ? <img src={doc.resource_image[0].guid} style="width:100%; max-height: 150px;"/>
     : <h4 dangerouslySetInnerHTML={{__html: doc.title.rendered}}/>;
   return (
-    <div className="col-md-4 mb20 card">
-      <a href={doc.resource_url}>
-        {a_content}
-      </a>
-      <div className="card-body" dangerouslySetInnerHTML={{__html: stripImages(doc.content.rendered)}}/>
+    <div className="col-md-4 mb30">
+      <div className="card card-body">
+        <a href={doc.resource_url}>
+          {a_content}
+        </a>
+        <div className="card-body" dangerouslySetInnerHTML={{__html: stripImages(doc.content.rendered)}}/>
+      </div>
     </div>
   );
 };
@@ -113,7 +115,7 @@ const ResultList = ({
   if (searchUI.sorghumbase) {
     return (
       <div id="sorghum" className="row">
-        <div className="fancy-title pt50">
+        <div className="container pt50">
           <h3>Sorghumbase search results</h3>
         </div>
         {ResultType(Post,   'Posts',  'Blog/News',       sorghumPosts,  searchUI, doChangeQuantity)}
