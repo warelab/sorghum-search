@@ -1,5 +1,5 @@
-import {connect} from 'redux-bundler-preact'
-import {h} from 'preact'
+import {connect} from 'redux-bundler-react'
+import React from 'react'
 
 const stripImages = (text) => {
   return text.replace(/<figure.*figure>/, ' ')
@@ -23,9 +23,9 @@ const Event = ({doc}) => (
       <h4 className="card-title">
         {doc.title.rendered}
       </h4>
-      <p class="card-text">{doc.start_date}</p>
-      <p class="card-text" dangerouslySetInnerHTML={{__html: stripImages(doc.content.rendered)}}/>
-      <a href={`/events#${doc.title.rendered}`} class="btn btn-primary">view event</a>
+      <p className="card-text">{doc.start_date}</p>
+      <p className="card-text" dangerouslySetInnerHTML={{__html: stripImages(doc.content.rendered)}}/>
+      <a href={`/events#${doc.title.rendered}`} className="btn btn-primary">view event</a>
     </div>
   </div>
 );
@@ -98,7 +98,7 @@ const ResultType = (cmp, id, label, results, searchUI, doChangeQuantity) => {
           <h4>{label}</h4>
         </div>
         <div className="row special-feature mb50">
-          {docsToShow.map(doc => h(cmp,{doc}))}
+          {docsToShow.map(doc => React.createElement(cmp,{doc}))}
         </div>
         <div className="row">
           {fewerButton}{moreButton}
