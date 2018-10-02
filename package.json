@@ -1,6 +1,6 @@
 {
   "name": "sorghum-search",
-  "version": "2.0.0",
+  "version": "1.0.18",
   "description": "search wrapper for sorghumbase",
   "main": "dist/index.js",
   "source": "src/index.js",
