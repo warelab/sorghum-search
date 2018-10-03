@@ -1,10 +1,9 @@
 import {connect} from 'redux-bundler-react'
 import React from 'react'
-const spinner = <img src="/static/images/dna_spinner.svg"/>;
 
 const getStatus = (cat, results, isChecked, toggle) => {
   const style = isChecked ? 'category-checked' : 'category-not-checked';
-  const tally = results ? results.numFound : spinner;
+  const tally = results ? results.numFound : <img src="/static/images/dna_spinner.svg"/>;
   return (
     <li className='category-leaf'>
       <input type="checkbox" checked={isChecked} onChange={e => toggle(cat)}/>
@@ -21,7 +20,7 @@ const total = (...args) => {
     else done = false
   });
   if (sum > 0 || done) return sum;
-  return spinner;
+  return <img src="/static/images/dna_spinner.svg"/>;
 };
 
 const ResultSummary = ({
