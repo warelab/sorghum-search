@@ -127,7 +127,10 @@ const ResultList = ({
       </div>
     );
   }
-}
+  else {
+    return null;
+  }
+};
 
 
 export default connect(
