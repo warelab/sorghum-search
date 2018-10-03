@@ -57,7 +57,7 @@ const Person = ({doc}) => (
 const defaultImg = "https://content.sorghumbase.org/wordpress/wp-content/uploads/2018/05/sorghum-grains_1920x1000.jpg";
 const Link = ({doc}) => {
   const a_content = doc.resource_image
-    ? <img src={doc.resource_image[0].source_url} style="width:100%; max-height: 150px;"/>
+    ? <img src={doc.resource_image[0].source_url} style={{width:"100%", "maxHeight": "150px"}}/>
     : <h4 dangerouslySetInnerHTML={{__html: doc.title.rendered}}/>;
   return (
     <div className="col-md-4 mb30">
