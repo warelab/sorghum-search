@@ -17,7 +17,7 @@
   "dependencies": {
     "react": "*",
     "react-dom": "^16.5.2",
-    "redux-bundler": "21.0.0",
+    "redux-bundler": "^21.0.0",
     "redux-bundler-react": "^1.0.1"
   },
   "prettier": {

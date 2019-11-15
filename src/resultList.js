@@ -4,6 +4,7 @@ import React from 'react'
 const stripImages = (text) => {
   return text.replace(/<figure.*figure>/, ' ')
 };
+const maxCardHeight = '300px';
 
 const Post = ({doc}) => (
   <div className="col-md-4 mb30">
@@ -11,8 +12,26 @@ const Post = ({doc}) => (
       <h4 className="card-title">
         {doc.title.rendered}
       </h4>
-      <p className="card-text" dangerouslySetInnerHTML={{__html: stripImages(doc.excerpt.rendered)}}/>
+      <div className="card-text" style={{
+          maxHeight: maxCardHeight,
+          overflowY: 'scroll'
+      }} dangerouslySetInnerHTML={{__html: stripImages(doc.excerpt.rendered)}}/>
       <a href={`/post/${doc.slug}`} className="btn btn-primary">read more</a>
+    </div>
+  </div>
+);
+
+const Project = ({doc}) => (
+  <div className="col-md-4 mb30">
+    <div className="card card-body">
+      <h4 className="card-title">
+        {doc.title.rendered}
+      </h4>
+      <div className="card-text" style={{
+        maxHeight: maxCardHeight,
+        overflowY: 'scroll'
+      }} dangerouslySetInnerHTML={{__html: stripImages(doc.content.rendered)}}/>
+      <a href={`/project/${doc.slug}`} className="btn btn-primary">read more</a>
     </div>
   </div>
 );
@@ -24,7 +43,10 @@ const Event = ({doc}) => (
         {doc.title.rendered}
       </h4>
       <p className="card-text">{doc.start_date}</p>
-      <p className="card-text" dangerouslySetInnerHTML={{__html: stripImages(doc.content.rendered)}}/>
+        <div className="card-text" style={{
+          maxHeight: maxCardHeight,
+          overflowY: 'scroll'
+        }} dangerouslySetInnerHTML={{__html: stripImages(doc.content.rendered)}}/>
       <a href={`/events#${doc.title.rendered}`} className="btn btn-primary">view event</a>
     </div>
   </div>
@@ -37,7 +59,10 @@ const Job = ({doc}) => (
         {doc.title.rendered}
       </h4>
       <p className="card-text">{doc.company}</p>
-      <p className="card-text" dangerouslySetInnerHTML={{__html: stripImages(doc.content.rendered)}}/>
+        <div className="card-text" style={{
+          maxHeight: maxCardHeight,
+          overflowY: 'scroll'
+        }} dangerouslySetInnerHTML={{__html: stripImages(doc.content.rendered)}}/>
       <a href={doc.job_url} className="btn btn-primary">view job posting</a>
     </div>
   </div>
@@ -65,7 +90,10 @@ const Link = ({doc}) => {
         <a href={doc.resource_url}>
           {a_content}
         </a>
-        <div className="card-body" dangerouslySetInnerHTML={{__html: stripImages(doc.content.rendered)}}/>
+          <div className="card-text" style={{
+            maxHeight: maxCardHeight,
+            overflowY: 'scroll'
+          }} dangerouslySetInnerHTML={{__html: stripImages(doc.content.rendered)}}/>
       </div>
     </div>
   );
@@ -109,7 +137,7 @@ const ResultType = (cmp, id, label, results, searchUI, doChangeQuantity) => {
 };
 
 const ResultList = ({
-                       sorghumPosts, sorghumEvents, sorghumJobs, sorghumPeople, sorghumLinks, sorghumPapers,
+                       sorghumPosts, sorghumProjects, sorghumEvents, sorghumJobs, sorghumPeople, sorghumLinks, sorghumPapers,
                        searchUI, searchUpdated, doChangeQuantity
                      }) => {
   if (searchUI.sorghumbase) {
@@ -118,12 +146,13 @@ const ResultList = ({
         <div className="container pt50">
           <h3>Sorghumbase search results</h3>
         </div>
-        {ResultType(Post,   'Posts',  'Blog/News',       sorghumPosts,  searchUI, doChangeQuantity)}
-        {ResultType(Event,  'Events', 'Events',          sorghumEvents, searchUI, doChangeQuantity)}
-        {ResultType(Job,    'Jobs',   'Jobs',            sorghumJobs,   searchUI, doChangeQuantity)}
-        {ResultType(Person, 'People', 'People',          sorghumPeople, searchUI, doChangeQuantity)}
-        {ResultType(Link,   'Links',  'Resource Links',  sorghumLinks,  searchUI, doChangeQuantity)}
-        {ResultType(Paper,  'Papers', 'Research Papers', sorghumPapers, searchUI, doChangeQuantity)}
+        {ResultType(Post,   'Posts',   'Blog/News',       sorghumPosts,   searchUI, doChangeQuantity)}
+        {ResultType(Project,'Projects','Projects',        sorghumProjects,searchUI, doChangeQuantity)}
+        {ResultType(Event,  'Events',  'Events',          sorghumEvents,  searchUI, doChangeQuantity)}
+        {ResultType(Job,    'Jobs',    'Jobs',            sorghumJobs,    searchUI, doChangeQuantity)}
+        {ResultType(Person, 'People',  'People',          sorghumPeople,  searchUI, doChangeQuantity)}
+        {ResultType(Link,   'Links',   'Resource Links',  sorghumLinks,   searchUI, doChangeQuantity)}
+        {ResultType(Paper,  'Papers',  'Research Papers', sorghumPapers,  searchUI, doChangeQuantity)}
       </div>
     );
   }
@@ -135,6 +164,7 @@ const ResultList = ({
 
 export default connect(
   'selectSorghumPosts',
+  'selectSorghumProjects',
   'selectSorghumEvents',
   'selectSorghumJobs',
   'selectSorghumPeople',

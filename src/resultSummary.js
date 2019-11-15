@@ -23,7 +23,7 @@ const total = (...args) => {
 };
 
 const ResultSummary = ({
-                         sorghumPosts, sorghumEvents, sorghumJobs,
+                         sorghumPosts, sorghumProjects, sorghumEvents, sorghumJobs,
                          sorghumPeople, sorghumLinks, sorghumPapers,
                          searchUI, searchUpdated, doToggleCategory
                        }) => {
@@ -31,10 +31,11 @@ const ResultSummary = ({
     <li className="active category-expanded">
       <a onClick={e => doToggleCategory('sorghumbase')}>
         Sorghumbase<span
-        style={{float:"right"}}>{total(sorghumPosts, sorghumEvents, sorghumJobs, sorghumPeople, sorghumLinks, sorghumPapers)}</span>
+        style={{float:"right"}}>{total(sorghumPosts, sorghumProjects, sorghumEvents, sorghumJobs, sorghumPeople, sorghumLinks, sorghumPapers)}</span>
       </a>
       <ul className="list-unstyled">
         {getStatus('Posts', sorghumPosts, searchUI.Posts, doToggleCategory)}
+        {getStatus('Projects', sorghumProjects, searchUI.Projects, doToggleCategory)}
         {getStatus('Events', sorghumEvents, searchUI.Events, doToggleCategory)}
         {getStatus('Jobs', sorghumJobs, searchUI.Jobs, doToggleCategory)}
         {getStatus('People', sorghumPeople, searchUI.People, doToggleCategory)}
@@ -47,7 +48,7 @@ const ResultSummary = ({
     <li className="active category-collapsed">
       <a onClick={e => doToggleCategory('sorghumbase')}>
         Sorghumbase<span
-        style={{float:"right"}}>{total(sorghumPosts, sorghumEvents, sorghumJobs, sorghumPeople, sorghumLinks, sorghumPapers)}</span>
+        style={{float:"right"}}>{total(sorghumPosts, sorghumProjects, sorghumEvents, sorghumJobs, sorghumPeople, sorghumLinks, sorghumPapers)}</span>
       </a>
     </li>
   );
@@ -56,6 +57,7 @@ const ResultSummary = ({
 
 export default connect(
   'selectSorghumPosts',
+  'selectSorghumProjects',
   'selectSorghumEvents',
   'selectSorghumJobs',
   'selectSorghumPeople',

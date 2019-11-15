@@ -1,7 +1,7 @@
 import {createAsyncResourceBundle, createSelector} from 'redux-bundler'
 // const API = 'http://brie6:8081/search_api';
-// const API = 'http://localhost:5000/search_api';
-const API = '/search_api';
+const API = 'http://localhost:9000/search_api';
+// const API = '/search_api';
 // const API = 'https://www.sorghumbase.org/search_api';
 
 const sorghumPosts = createAsyncResourceBundle({
@@ -19,6 +19,25 @@ sorghumPosts.reactSorghumPosts = createSelector(
   (shouldUpdate, queryString) => {
     if (shouldUpdate && queryString) {
       return {actionCreator: 'doFetchSorghumPosts'}
+    }
+  }
+);
+
+const sorghumProjects = createAsyncResourceBundle({
+  name: 'sorghumProjects',
+  actionBaseType: 'SORGHUM_PROJECTS',
+  persist: false,
+  getPromise: ({store}) =>
+    fetch(`${API}/project?${store.selectQueryString()}&rows=${store.selectRows()['Projects'] * 3}`)
+      .then(res => res.json())
+});
+
+sorghumProjects.reactSorghumProjects = createSelector(
+  'selectSorghumProjectsShouldUpdate',
+  'selectQueryString',
+  (shouldUpdate, queryString) => {
+    if (shouldUpdate && queryString) {
+      return {actionCreator: 'doFetchSorghumProjects'}
     }
   }
 );
@@ -118,4 +137,4 @@ sorghumPapers.reactSorghumPapers = createSelector(
   }
 );
 
-export default [sorghumPosts, sorghumLinks, sorghumPeople, sorghumJobs, sorghumEvents, sorghumPapers];
+export default [sorghumPosts, sorghumProjects, sorghumLinks, sorghumPeople, sorghumJobs, sorghumEvents, sorghumPapers];
