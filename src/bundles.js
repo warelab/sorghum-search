@@ -1,8 +1,8 @@
 import {createAsyncResourceBundle, createSelector} from 'redux-bundler'
 // const API = 'http://brie6:8081/search_api';
-const API = 'http://localhost:9000/search_api';
+// const API = 'http://localhost:9000/search_api';
 // const API = '/search_api';
-// const API = 'https://www.sorghumbase.org/search_api';
+const API = 'https://www.sorghumbase.org/search_api';
 
 const sorghumPosts = createAsyncResourceBundle({
   name: 'sorghumPosts',
@@ -70,7 +70,7 @@ const sorghumPeople = createAsyncResourceBundle({
       .then(res => res.json())
 });
 
-sorghumLinks.reactSorghumPeople = createSelector(
+sorghumPeople.reactSorghumPeople = createSelector(
   'selectSorghumPeopleShouldUpdate',
   'selectQueryString',
   (shouldUpdate, queryString) => {
@@ -137,4 +137,152 @@ sorghumPapers.reactSorghumPapers = createSelector(
   }
 );
 
-export default [sorghumPosts, sorghumProjects, sorghumLinks, sorghumPeople, sorghumJobs, sorghumEvents, sorghumPapers];
+const sorghumPostsSuggestions = createAsyncResourceBundle({
+  name: 'sorghumPostsSuggestions',
+  actionBaseType: 'SORGHUM_POSTS_SUGGESTIONS',
+  persist: false,
+  getPromise: ({store}) =>
+    fetch(`${API}/posts?q=${store.selectSuggestionsQuery()}&rows=1`)
+      .then(res => res.json())
+});
+
+sorghumPostsSuggestions.reactSorghumPostsSuggestions = createSelector(
+  'selectSorghumPostsSuggestionsShouldUpdate',
+  'selectSuggestionsQuery',
+  (shouldUpdate, queryString) => {
+    if (shouldUpdate && queryString) {
+      return {actionCreator: 'doFetchSorghumPostsSuggestions'}
+    }
+  }
+);
+
+const sorghumProjectsSuggestions = createAsyncResourceBundle({
+  name: 'sorghumProjectsSuggestions',
+  actionBaseType: 'SORGHUM_PROJECTS_SUGGESTIONS',
+  persist: false,
+  getPromise: ({store}) =>
+    fetch(`${API}/project?q=${store.selectSuggestionsQuery()}&rows=1`)
+      .then(res => res.json())
+});
+
+sorghumProjectsSuggestions.reactSorghumProjectsSuggestions = createSelector(
+  'selectSorghumProjectsSuggestionsShouldUpdate',
+  'selectSuggestionsQuery',
+  (shouldUpdate, queryString) => {
+    if (shouldUpdate && queryString) {
+      return {actionCreator: 'doFetchSorghumProjectsSuggestions'}
+    }
+  }
+);
+
+const sorghumLinksSuggestions = createAsyncResourceBundle({
+  name: 'sorghumLinksSuggestions',
+  actionBaseType: 'SORGHUM_LINKS_SUGGESTIONS',
+  persist: false,
+  getPromise: ({store}) =>
+    fetch(`${API}/resource-link?q=${store.selectSuggestionsQuery()}&rows=1`)
+      .then(res => res.json())
+});
+
+sorghumLinksSuggestions.reactSorghumLinksSuggestions = createSelector(
+  'selectSorghumLinksSuggestionsShouldUpdate',
+  'selectSuggestionsQuery',
+  (shouldUpdate, queryString) => {
+    if (shouldUpdate && queryString) {
+      return {actionCreator: 'doFetchSorghumLinksSuggestions'}
+    }
+  }
+);
+
+const sorghumPeopleSuggestions = createAsyncResourceBundle({
+  name: 'sorghumPeopleSuggestions',
+  actionBaseType: 'SORGHUM_PEOPLE_SUGGESTIONS',
+  persist: false,
+  getPromise: ({store}) =>
+    fetch(`${API}/users?q=${store.selectSuggestionsQuery()}&rows=1`)
+      .then(res => res.json())
+});
+
+sorghumPeopleSuggestions.reactSorghumPeopleSuggestions = createSelector(
+  'selectSorghumPeopleSuggestionsShouldUpdate',
+  'selectSuggestionsQuery',
+  (shouldUpdate, queryString) => {
+    if (shouldUpdate && queryString) {
+      return {actionCreator: 'doFetchSorghumPeopleSuggestions'}
+    }
+  }
+);
+
+const sorghumJobsSuggestions = createAsyncResourceBundle({
+  name: 'sorghumJobsSuggestions',
+  actionBaseType: 'SORGHUM_JOBS_SUGGESTIONS',
+  persist: false,
+  getPromise: ({store}) =>
+    fetch(`${API}/job?q=${store.selectSuggestionsQuery()}&rows=1`)
+      .then(res => res.json())
+});
+
+sorghumJobsSuggestions.reactSorghumJobsSuggestions = createSelector(
+  'selectSorghumJobsSuggestionsShouldUpdate',
+  'selectSuggestionsQuery',
+  (shouldUpdate, queryString) => {
+    if (shouldUpdate && queryString) {
+      return {actionCreator: 'doFetchSorghumJobsSuggestions'}
+    }
+  }
+);
+
+const sorghumEventsSuggestions = createAsyncResourceBundle({
+  name: 'sorghumEventsSuggestions',
+  actionBaseType: 'SORGHUM_EVENTS_SUGGESTIONS',
+  persist: false,
+  getPromise: ({store}) =>
+    fetch(`${API}/event?q=${store.selectSuggestionsQuery()}&rows=1`)
+      .then(res => res.json())
+});
+
+sorghumEventsSuggestions.reactSorghumEventsSuggestions = createSelector(
+  'selectSorghumEventsSuggestionsShouldUpdate',
+  'selectSuggestionsQuery',
+  (shouldUpdate, queryString) => {
+    if (shouldUpdate && queryString) {
+      return {actionCreator: 'doFetchSorghumEventsSuggestions'}
+    }
+  }
+);
+
+const sorghumPapersSuggestions = createAsyncResourceBundle({
+  name: 'sorghumPapersSuggestions',
+  actionBaseType: 'SORGHUM_PAPERS_SUGGESTIONS',
+  persist: false,
+  getPromise: ({store}) =>
+    fetch(`${API}/scientific_paper?q=${store.selectSuggestionsQuery()}&rows=1`)
+      .then(res => res.json())
+});
+
+sorghumPapersSuggestions.reactSorghumPapersSuggestions = createSelector(
+  'selectSorghumPapersSuggestionsShouldUpdate',
+  'selectSuggestionsQuery',
+  (shouldUpdate, queryString) => {
+    if (shouldUpdate && queryString) {
+      return {actionCreator: 'doFetchSorghumPapersSuggestions'}
+    }
+  }
+);
+
+export default [
+  sorghumPosts,
+  sorghumProjects,
+  sorghumLinks,
+  sorghumPeople,
+  sorghumJobs,
+  sorghumEvents,
+  sorghumPapers,
+  sorghumPostsSuggestions,
+  sorghumProjectsSuggestions,
+  sorghumLinksSuggestions,
+  sorghumPeopleSuggestions,
+  sorghumJobsSuggestions,
+  sorghumEventsSuggestions,
+  sorghumPapersSuggestions
+];
