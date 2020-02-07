@@ -24,20 +24,19 @@ const total = (...args) => {
 };
 
 const Suggestions = ({   suggestionsQuery,
-                         sorghumPostsSuggestions, sorghumProjectsSuggestions, sorghumEventsSuggestions, sorghumJobsSuggestions,
+                         sorghumPostsSuggestions, sorghumProjectsSuggestions, sorghumEventsSuggestions,
                          sorghumPeopleSuggestions, sorghumLinksSuggestions, sorghumPapersSuggestions,
                          doClearSuggestions, doAcceptSorghumSuggestion
                        }) => (
   <div className="container">
     <div className="row">
-      <div className="col-md-1">{total(sorghumPostsSuggestions, sorghumProjectsSuggestions, sorghumEventsSuggestions, sorghumJobsSuggestions,
+      <div className="col-md-1">{total(sorghumPostsSuggestions, sorghumProjectsSuggestions, sorghumEventsSuggestions,
         sorghumPeopleSuggestions, sorghumLinksSuggestions, sorghumPapersSuggestions)}
       </div>
       <div className="col-md-6">
         {getStatus('Posts', sorghumPostsSuggestions, doClearSuggestions, doAcceptSorghumSuggestion, suggestionsQuery)}
         {getStatus('Projects', sorghumProjectsSuggestions, doClearSuggestions, doAcceptSorghumSuggestion, suggestionsQuery)}
         {getStatus('Events', sorghumEventsSuggestions, doClearSuggestions, doAcceptSorghumSuggestion, suggestionsQuery)}
-        {getStatus('Jobs', sorghumJobsSuggestions, doClearSuggestions, doAcceptSorghumSuggestion, suggestionsQuery)}
         {getStatus('People', sorghumPeopleSuggestions, doClearSuggestions, doAcceptSorghumSuggestion, suggestionsQuery)}
         {getStatus('Links', sorghumLinksSuggestions, doClearSuggestions, doAcceptSorghumSuggestion, suggestionsQuery)}
         {getStatus('Papers', sorghumPapersSuggestions, doClearSuggestions, doAcceptSorghumSuggestion, suggestionsQuery)}
@@ -83,7 +82,6 @@ export default connect(
   'selectSorghumPostsSuggestions',
   'selectSorghumProjectsSuggestions',
   'selectSorghumEventsSuggestions',
-  'selectSorghumJobsSuggestions',
   'selectSorghumPeopleSuggestions',
   'selectSorghumLinksSuggestions',
   'selectSorghumPapersSuggestions',
