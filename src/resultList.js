@@ -137,7 +137,7 @@ const ResultType = (cmp, id, label, results, searchUI, doChangeQuantity) => {
 };
 
 const ResultList = ({
-                       sorghumPosts, sorghumProjects, sorghumEvents, sorghumJobs, sorghumPeople, sorghumLinks, sorghumPapers,
+                       sorghumPosts, sorghumProjects, sorghumEvents, sorghumPeople, sorghumLinks, sorghumPapers,
                        searchUI, searchUpdated, doChangeQuantity
                      }) => {
   if (searchUI.sorghumbase) {
@@ -149,7 +149,6 @@ const ResultList = ({
         {ResultType(Post,   'Posts',   'Blog/News',       sorghumPosts,   searchUI, doChangeQuantity)}
         {ResultType(Project,'Projects','Projects',        sorghumProjects,searchUI, doChangeQuantity)}
         {ResultType(Event,  'Events',  'Events',          sorghumEvents,  searchUI, doChangeQuantity)}
-        {ResultType(Job,    'Jobs',    'Jobs',            sorghumJobs,    searchUI, doChangeQuantity)}
         {ResultType(Person, 'People',  'People',          sorghumPeople,  searchUI, doChangeQuantity)}
         {ResultType(Link,   'Links',   'Resource Links',  sorghumLinks,   searchUI, doChangeQuantity)}
         {ResultType(Paper,  'Papers',  'Research Papers', sorghumPapers,  searchUI, doChangeQuantity)}
@@ -166,7 +165,6 @@ export default connect(
   'selectSorghumPosts',
   'selectSorghumProjects',
   'selectSorghumEvents',
-  'selectSorghumJobs',
   'selectSorghumPeople',
   'selectSorghumLinks',
   'selectSorghumPapers',

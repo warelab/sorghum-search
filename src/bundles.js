@@ -16,8 +16,9 @@ const sorghumPosts = createAsyncResourceBundle({
 sorghumPosts.reactSorghumPosts = createSelector(
   'selectSorghumPostsShouldUpdate',
   'selectQueryString',
-  (shouldUpdate, queryString) => {
-    if (shouldUpdate && queryString) {
+  'selectPathname',
+  (shouldUpdate, queryString, path) => {
+    if (shouldUpdate && queryString && (path === '/search' || path === '/search.html')) {
       return {actionCreator: 'doFetchSorghumPosts'}
     }
   }
@@ -35,8 +36,9 @@ const sorghumProjects = createAsyncResourceBundle({
 sorghumProjects.reactSorghumProjects = createSelector(
   'selectSorghumProjectsShouldUpdate',
   'selectQueryString',
-  (shouldUpdate, queryString) => {
-    if (shouldUpdate && queryString) {
+  'selectPathname',
+  (shouldUpdate, queryString, path) => {
+    if (shouldUpdate && queryString && (path === '/search' || path === '/search.html')) {
       return {actionCreator: 'doFetchSorghumProjects'}
     }
   }
@@ -54,8 +56,9 @@ const sorghumLinks = createAsyncResourceBundle({
 sorghumLinks.reactSorghumLinks = createSelector(
   'selectSorghumLinksShouldUpdate',
   'selectQueryString',
-  (shouldUpdate, queryString) => {
-    if (shouldUpdate && queryString) {
+  'selectPathname',
+  (shouldUpdate, queryString, path) => {
+    if (shouldUpdate && queryString && (path === '/search' || path === '/search.html')) {
       return {actionCreator: 'doFetchSorghumLinks'}
     }
   }
@@ -73,28 +76,10 @@ const sorghumPeople = createAsyncResourceBundle({
 sorghumPeople.reactSorghumPeople = createSelector(
   'selectSorghumPeopleShouldUpdate',
   'selectQueryString',
-  (shouldUpdate, queryString) => {
-    if (shouldUpdate && queryString) {
+  'selectPathname',
+  (shouldUpdate, queryString, path) => {
+    if (shouldUpdate && queryString && (path === '/search' || path === '/search.html')) {
       return {actionCreator: 'doFetchSorghumPeople'}
-    }
-  }
-);
-
-const sorghumJobs = createAsyncResourceBundle({
-  name: 'sorghumJobs',
-  actionBaseType: 'SORGHUM_JOBS',
-  persist: false,
-  getPromise: ({store}) =>
-    fetch(`${API}/job?${store.selectQueryString()}&rows=${store.selectRows()['Jobs'] * 3}`)
-      .then(res => res.json())
-});
-
-sorghumJobs.reactSorghumJobs = createSelector(
-  'selectSorghumJobsShouldUpdate',
-  'selectQueryString',
-  (shouldUpdate, queryString) => {
-    if (shouldUpdate && queryString) {
-      return {actionCreator: 'doFetchSorghumJobs'}
     }
   }
 );
@@ -111,8 +96,9 @@ const sorghumEvents = createAsyncResourceBundle({
 sorghumEvents.reactSorghumEvents = createSelector(
   'selectSorghumEventsShouldUpdate',
   'selectQueryString',
-  (shouldUpdate, queryString) => {
-    if (shouldUpdate && queryString) {
+  'selectPathname',
+  (shouldUpdate, queryString, path) => {
+    if (shouldUpdate && queryString && (path === '/search' || path === '/search.html')) {
       return {actionCreator: 'doFetchSorghumEvents'}
     }
   }
@@ -130,8 +116,9 @@ const sorghumPapers = createAsyncResourceBundle({
 sorghumPapers.reactSorghumPapers = createSelector(
   'selectSorghumPapersShouldUpdate',
   'selectQueryString',
-  (shouldUpdate, queryString) => {
-    if (shouldUpdate && queryString) {
+  'selectPathname',
+  (shouldUpdate, queryString, path) => {
+    if (shouldUpdate && queryString && (path === '/search' || path === '/search.html')) {
       return {actionCreator: 'doFetchSorghumPapers'}
     }
   }
@@ -213,25 +200,6 @@ sorghumPeopleSuggestions.reactSorghumPeopleSuggestions = createSelector(
   }
 );
 
-const sorghumJobsSuggestions = createAsyncResourceBundle({
-  name: 'sorghumJobsSuggestions',
-  actionBaseType: 'SORGHUM_JOBS_SUGGESTIONS',
-  persist: false,
-  getPromise: ({store}) =>
-    fetch(`${API}/job?q=${store.selectSuggestionsQuery()}&rows=1`)
-      .then(res => res.json())
-});
-
-sorghumJobsSuggestions.reactSorghumJobsSuggestions = createSelector(
-  'selectSorghumJobsSuggestionsShouldUpdate',
-  'selectSuggestionsQuery',
-  (shouldUpdate, queryString) => {
-    if (shouldUpdate && queryString) {
-      return {actionCreator: 'doFetchSorghumJobsSuggestions'}
-    }
-  }
-);
-
 const sorghumEventsSuggestions = createAsyncResourceBundle({
   name: 'sorghumEventsSuggestions',
   actionBaseType: 'SORGHUM_EVENTS_SUGGESTIONS',
@@ -274,15 +242,13 @@ export default [
   sorghumPosts,
   sorghumProjects,
   sorghumLinks,
-  sorghumPeople,
-  sorghumJobs,
+  // sorghumPeople,
   sorghumEvents,
   sorghumPapers,
   sorghumPostsSuggestions,
   sorghumProjectsSuggestions,
   sorghumLinksSuggestions,
-  sorghumPeopleSuggestions,
-  sorghumJobsSuggestions,
+  // sorghumPeopleSuggestions,
   sorghumEventsSuggestions,
   sorghumPapersSuggestions
 ];
