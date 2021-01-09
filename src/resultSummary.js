@@ -24,7 +24,7 @@ const total = (...args) => {
 
 const ResultSummary = ({
                          sorghumPosts, sorghumProjects, sorghumEvents,
-                         sorghumPeople, sorghumLinks, sorghumPapers,
+                         sorghumLinks, sorghumPapers,
                          searchUI, searchUpdated, doToggleCategory
                        }) => {
   if (searchUI.sorghumbase) return (
@@ -37,7 +37,7 @@ const ResultSummary = ({
         {getStatus('Posts', sorghumPosts, searchUI.Posts, doToggleCategory)}
         {getStatus('Projects', sorghumProjects, searchUI.Projects, doToggleCategory)}
         {getStatus('Events', sorghumEvents, searchUI.Events, doToggleCategory)}
-        {getStatus('People', sorghumPeople, searchUI.People, doToggleCategory)}
+        {/*{getStatus('People', sorghumPeople, searchUI.People, doToggleCategory)}*/}
         {getStatus('Links', sorghumLinks, searchUI.Links, doToggleCategory)}
         {getStatus('Papers', sorghumPapers, searchUI.Papers, doToggleCategory)}
       </ul>
@@ -47,7 +47,7 @@ const ResultSummary = ({
     <li className="active category-collapsed">
       <a onClick={e => doToggleCategory('sorghumbase')}>
         Sorghumbase<span
-        style={{float:"right"}}>{total(sorghumPosts, sorghumProjects, sorghumEvents, sorghumPeople, sorghumLinks, sorghumPapers)}</span>
+        style={{float:"right"}}>{total(sorghumPosts, sorghumProjects, sorghumEvents, sorghumLinks, sorghumPapers)}</span>
       </a>
     </li>
   );
@@ -58,7 +58,7 @@ export default connect(
   'selectSorghumPosts',
   'selectSorghumProjects',
   'selectSorghumEvents',
-  'selectSorghumPeople',
+  // 'selectSorghumPeople',
   'selectSorghumLinks',
   'selectSorghumPapers',
   'selectSearchUI',
