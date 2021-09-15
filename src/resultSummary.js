@@ -31,7 +31,7 @@ const ResultSummary = ({
     <li className="active category-expanded">
       <a onClick={e => doToggleCategory('sorghumbase')}>
         Sorghumbase<span
-        style={{float:"right"}}>{total(sorghumPosts, sorghumProjects, sorghumEvents, sorghumPeople, sorghumLinks, sorghumPapers)}</span>
+        style={{float:"right"}}>{total(sorghumPosts, sorghumProjects, sorghumEvents, sorghumLinks, sorghumPapers)}</span>
       </a>
       <ul className="list-unstyled">
         {getStatus('Posts', sorghumPosts, searchUI.Posts, doToggleCategory)}

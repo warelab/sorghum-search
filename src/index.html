@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sorghumbase CMS search</title>
+</head>
+<body>
+<div id="searchbar-parent">
+    <div id="searchbar"></div>
+</div>
+<script src="./demo.js"></script>
+<script>
+  document.addEventListener('keyup', possiblyFocus);
+  function possiblyFocus(e) {
+    if (e.key === '/') {
+      var el = document.getElementById('search-input');
+      if (el) {
+        el.focus()
+      }
+    }
+  }
+</script>
+</body>
+</html>

@@ -126,7 +126,7 @@ const ResultType = (cmp, id, label, results, searchUI, doChangeQuantity) => {
           <h4>{label}</h4>
         </div>
         <div className="row special-feature mb50">
-          {docsToShow.map(doc => React.createElement(cmp,{doc}))}
+          {docsToShow.map((doc,idx) => React.createElement(cmp,{doc, key:idx}))}
         </div>
         <div className="row">
           {fewerButton}{moreButton}
@@ -137,7 +137,7 @@ const ResultType = (cmp, id, label, results, searchUI, doChangeQuantity) => {
 };
 
 const ResultList = ({
-                       sorghumPosts, sorghumProjects, sorghumEvents, sorghumPeople, sorghumLinks, sorghumPapers,
+                       sorghumPosts, sorghumProjects, sorghumEvents, sorghumLinks, sorghumPapers,
                        searchUI, searchUpdated, doChangeQuantity
                      }) => {
   if (searchUI.sorghumbase) {
@@ -149,7 +149,6 @@ const ResultList = ({
         {ResultType(Post,   'Posts',   'Blog/News',       sorghumPosts,   searchUI, doChangeQuantity)}
         {ResultType(Project,'Projects','Projects',        sorghumProjects,searchUI, doChangeQuantity)}
         {ResultType(Event,  'Events',  'Events',          sorghumEvents,  searchUI, doChangeQuantity)}
-        {ResultType(Person, 'People',  'People',          sorghumPeople,  searchUI, doChangeQuantity)}
         {ResultType(Link,   'Links',   'Resource Links',  sorghumLinks,   searchUI, doChangeQuantity)}
         {ResultType(Paper,  'Papers',  'Research Papers', sorghumPapers,  searchUI, doChangeQuantity)}
       </div>
@@ -165,7 +164,6 @@ export default connect(
   'selectSorghumPosts',
   'selectSorghumProjects',
   'selectSorghumEvents',
-  'selectSorghumPeople',
   'selectSorghumLinks',
   'selectSorghumPapers',
   'selectSearchUI',
