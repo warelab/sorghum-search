@@ -14,7 +14,7 @@ const PostsCmp = ({sorghumPostsSuggestions, doAcceptSuggestion}) => (
       <Card key={idx} bg='light' text='dark' border='dark'>
         <Card.Body>
           <Card.Title>{post.title.rendered}</Card.Title>
-          <Card.Text>{post._embedded.author[0].name}</Card.Text>
+          <Card.Text>{post.excerpt}</Card.Text>
         </Card.Body>
         <Card.Footer>
           <small className="text-muted">
