@@ -56,8 +56,8 @@ const EventsCmp = ({sorghumEventsSuggestions, doAcceptSuggestion}) => (
     {sorghumEventsSuggestions && sorghumEventsSuggestions.docs.map((event,idx) =>
       <Card key={idx} bg='light' text='dark' border='dark'>
         <Card.Body>
-          <Card.Title>{event.title.rendered}</Card.Title>
-          <Card.Text dangerouslySetInnerHTML={{__html: event.content.rendered}}/>
+          <Card.Title dangerouslySetInnerHTML={createMarkup(event.title.rendered)}/>
+          <Card.Text dangerouslySetInnerHTML={createMarkup(event.content.rendered)}/>
         </Card.Body>
         <Card.Footer>
           <small className="text-muted">
@@ -83,7 +83,7 @@ const PapersCmp = ({sorghumPapersSuggestions, sorghumTags, doAcceptSuggestion}) 
     {sorghumPapersSuggestions && sorghumPapersSuggestions.docs.map((paper,idx) =>
       <Card key={idx} bg='light' text='dark' border='dark'>
         <Card.Body>
-          <Card.Title>{paper.title.rendered}</Card.Title>
+          <Card.Title dangerouslySetInnerHTML={createMarkup(paper.title.rendered)}/>
           <Card.Text>
               {paper.paper_authors}<br />
             <small>
