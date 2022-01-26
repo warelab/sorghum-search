@@ -8,13 +8,16 @@ const formatDate = (dateString) => {
   const date = new Date(dateString);
   return new Intl.DateTimeFormat('en-US', dateOptions).format(date);
 };
+function createMarkup(content) {
+  return {__html: content}
+}
 const PostsCmp = ({sorghumPostsSuggestions, doAcceptSuggestion}) => (
   <CardColumns>
     {sorghumPostsSuggestions && sorghumPostsSuggestions.docs.map((post,idx) =>
       <Card key={idx} bg='light' text='dark' border='dark'>
         <Card.Body>
-          <Card.Title>{post.title.rendered}</Card.Title>
-          <Card.Text>{post.excerpt.rendered}</Card.Text>
+          <Card.Title dangerouslySetInnerHTML={createMarkup(post.title.rendered)}/>
+          <Card.Text dangerouslySetInnerHTML={createMarkup(post.excerpt.rendered)}/>
         </Card.Body>
         <Card.Footer>
           <small className="text-muted">
