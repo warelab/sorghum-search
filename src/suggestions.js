@@ -63,7 +63,7 @@ const EventsCmp = ({sorghumEventsSuggestions, doAcceptSuggestion}) => (
           <small className="text-muted">
             {formatDate(event.start_date)}
           </small>
-          <a href={`/events#${event.title.rendered}`} style={{float:'right'}} onClick={doAcceptSuggestion}>
+          <a href={`/events#${event.s.id}`} style={{float:'right'}} onClick={doAcceptSuggestion}>
             Details
           </a>
         </Card.Footer>
