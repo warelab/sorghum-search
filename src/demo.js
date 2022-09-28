@@ -8,7 +8,6 @@ import { Nav, Tab, Row, Col } from 'react-bootstrap'
 import bundles from './bundles';
 import UIbundle from './UIbundle';
 import SorghumSummary from './suggestions';
-import 'bootstrap/dist/css/bootstrap.min.css';
 const cache = getConfiguredCache({
   maxAge: 100 * 60 * 60,
   version: 1

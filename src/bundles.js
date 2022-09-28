@@ -1,6 +1,6 @@
 import {createAsyncResourceBundle, createSelector} from 'redux-bundler'
 // const API = 'http://brie6:8081/search_api';
-// const API = 'http://localhost:9000/search_api';
+// const API = 'http://127.0.0.1:5000/search_api';
 // const API = '/search_api';
 const API = 'https://www.sorghumbase.org/search_api';
 
@@ -131,6 +131,10 @@ const sorghumPostsSuggestions = createAsyncResourceBundle({
   getPromise: ({store}) =>
     fetch(`${API}/posts?q=${store.selectSuggestionsQuery()}&rows=100`)
       .then(res => res.json())
+      .then(posts => {
+        const q = store.selectSuggestionsQuery()
+        return q === posts.q ? posts : store.selectPostsSuggestions()
+      })
 });
 
 sorghumPostsSuggestions.reactSorghumPostsSuggestions = createSelector(
@@ -208,6 +212,10 @@ const sorghumEventsSuggestions = createAsyncResourceBundle({
     fetch(`${API}/event?q=${store.selectSuggestionsQuery()}&rows=100`)
       .then(res => res.json())
       .then(events => {
+        const q = store.selectSuggestionsQuery()
+        return q === events.q ? events : store.selectEventsSuggestions()
+      })
+      .then(events => {
         // filter out past events
         const now = new Date();
         events.docs = events.docs.filter(e => new Date(e.start_date) > now);
@@ -233,6 +241,10 @@ const sorghumPapersSuggestions = createAsyncResourceBundle({
   getPromise: ({store}) =>
     fetch(`${API}/scientific_paper?q=${store.selectSuggestionsQuery()}&rows=100`)
       .then(res => res.json())
+      .then(papers => {
+        const q = store.selectSuggestionsQuery()
+        return q === papers.q ? papers : store.selectPapersSuggestions()
+      })
 });
 
 sorghumPapersSuggestions.reactSorghumPapersSuggestions = createSelector(
