@@ -32,7 +32,7 @@ const PostsCmp = ({sorghumPostsSuggestions, doAcceptSuggestion}) => (
   </CardGroup>
 );
 // const ProjectsCmp = ({sorghumProjectsSuggestions, doAcceptPostSuggestion}) => (
-//   <CardColumns>
+//   <CardGroup>
 //     {sorghumProjectsSuggestions && sorghumProjectsSuggestions.docs.map((post,idx) =>
 //       <Card key={idx} bg='light' text='dark' border='dark'>
 //         <Card.Body>
@@ -49,10 +49,10 @@ const PostsCmp = ({sorghumPostsSuggestions, doAcceptSuggestion}) => (
 //         </Card.Footer>
 //       </Card>
 //     )}
-//   </CardColumns>
+//   </CardGroup>
 // );
 const EventsCmp = ({sorghumEventsSuggestions, doAcceptSuggestion}) => (
-  <CardColumns>
+  <CardGroup>
     {sorghumEventsSuggestions && sorghumEventsSuggestions.docs.map((event,idx) =>
       <Card key={idx} bg='light' text='dark' border='dark'>
         <Card.Body>
@@ -69,7 +69,7 @@ const EventsCmp = ({sorghumEventsSuggestions, doAcceptSuggestion}) => (
         </Card.Footer>
       </Card>
     )}
-  </CardColumns>
+  </CardGroup>
 );
 // const LinksCmp = ({sorghumLinksSuggestions, doAcceptLinkSuggestion}) => (
 //   <div>
@@ -79,7 +79,7 @@ const EventsCmp = ({sorghumEventsSuggestions, doAcceptSuggestion}) => (
 //   </div>
 // );
 const PapersCmp = ({sorghumPapersSuggestions, sorghumTags, doAcceptSuggestion}) => (
-  <CardColumns>
+  <CardGroup>
     {sorghumPapersSuggestions && sorghumPapersSuggestions.docs.map((paper,idx) =>
       <Card key={idx} bg='light' text='dark' border='dark'>
         <Card.Body>
@@ -101,7 +101,7 @@ const PapersCmp = ({sorghumPapersSuggestions, sorghumTags, doAcceptSuggestion}) 
         </Card.Footer>
       </Card>
     )}
-  </CardColumns>
+  </CardGroup>
 );
 
 const Posts = connect(
