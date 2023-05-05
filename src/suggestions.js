@@ -1,6 +1,6 @@
 import {connect} from 'redux-bundler-react'
 import React from 'react'
-import {Button, Nav, Tabs, Tab, CardColumns, Card} from 'react-bootstrap'
+import {Button, Nav, Tabs, Tab, CardGroup, Card} from 'react-bootstrap'
 
 const dateOptions = {weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'};
 
@@ -12,7 +12,7 @@ function createMarkup(content) {
   return {__html: content}
 }
 const PostsCmp = ({sorghumPostsSuggestions, doAcceptSuggestion}) => (
-  <CardColumns>
+  <CardGroup>
     {sorghumPostsSuggestions && sorghumPostsSuggestions.docs.map((post,idx) =>
       <Card key={idx} bg='light' text='dark' border='dark'>
         <Card.Body>
@@ -29,7 +29,7 @@ const PostsCmp = ({sorghumPostsSuggestions, doAcceptSuggestion}) => (
         </Card.Footer>
       </Card>
     )}
-  </CardColumns>
+  </CardGroup>
 );
 // const ProjectsCmp = ({sorghumProjectsSuggestions, doAcceptPostSuggestion}) => (
 //   <CardColumns>
