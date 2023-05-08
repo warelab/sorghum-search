@@ -1,6 +1,6 @@
 import {connect} from 'redux-bundler-react'
 import React from 'react'
-import {Button, Nav, Tabs, Tab, CardGroup, Card} from 'react-bootstrap'
+import {Button, Nav, Tabs, Tab, Row, Col, Card} from 'react-bootstrap'
 
 const dateOptions = {weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'};
 
@@ -12,28 +12,31 @@ function createMarkup(content) {
   return {__html: content}
 }
 const PostsCmp = ({sorghumPostsSuggestions, doAcceptSuggestion}) => (
-  <CardGroup>
+  <Row xs={1} md={2} lg={4} className="g-4">
     {sorghumPostsSuggestions && sorghumPostsSuggestions.docs.map((post,idx) =>
-      <Card key={idx} bg='light' text='dark' border='dark'>
-        <Card.Body>
-          <Card.Title dangerouslySetInnerHTML={createMarkup(post.title.rendered)}/>
-          <Card.Text dangerouslySetInnerHTML={createMarkup(post.excerpt.rendered)}/>
-        </Card.Body>
-        <Card.Footer>
-          <small className="text-muted">
-            {formatDate(post.date)}
-          </small>
-          <a href={`/post/${post.slug}`} style={{float:'right'}} onClick={doAcceptSuggestion}>
-            Read more
-          </a>
-        </Card.Footer>
-      </Card>
+      <Col>
+        <Card key={idx} bg='light' text='dark' border='dark'>
+          <Card.Body>
+            <Card.Title dangerouslySetInnerHTML={createMarkup(post.title.rendered)}/>
+            <Card.Text dangerouslySetInnerHTML={createMarkup(post.excerpt.rendered)}/>
+          </Card.Body>
+          <Card.Footer>
+            <small className="text-muted">
+              {formatDate(post.date)}
+            </small>
+            <a href={`/post/${post.slug}`} style={{float:'right'}} onClick={doAcceptSuggestion}>
+              Read more
+            </a>
+          </Card.Footer>
+        </Card>
+      </Col>
     )}
-  </CardGroup>
+  </Row>
 );
 // const ProjectsCmp = ({sorghumProjectsSuggestions, doAcceptPostSuggestion}) => (
-//   <CardGroup>
+//   <Row xs={1} md={2} lg={4} className="g-4">
 //     {sorghumProjectsSuggestions && sorghumProjectsSuggestions.docs.map((post,idx) =>
+//      <Col>
 //       <Card key={idx} bg='light' text='dark' border='dark'>
 //         <Card.Body>
 //           <Card.Title>{post.title.rendered}</Card.Title>
@@ -48,28 +51,31 @@ const PostsCmp = ({sorghumPostsSuggestions, doAcceptSuggestion}) => (
 //           </a>
 //         </Card.Footer>
 //       </Card>
+//      </Col>
 //     )}
-//   </CardGroup>
+//   </Row>
 // );
 const EventsCmp = ({sorghumEventsSuggestions, doAcceptSuggestion}) => (
-  <CardGroup>
+  <Row xs={1} md={2} lg={4} className="g-4">
     {sorghumEventsSuggestions && sorghumEventsSuggestions.docs.map((event,idx) =>
-      <Card key={idx} bg='light' text='dark' border='dark'>
-        <Card.Body>
-          <Card.Title dangerouslySetInnerHTML={createMarkup(event.title.rendered)}/>
-          <Card.Text dangerouslySetInnerHTML={createMarkup(event.content.rendered)}/>
-        </Card.Body>
-        <Card.Footer>
-          <small className="text-muted">
-            {formatDate(event.start_date)}
-          </small>
-          <a href={`/events#${event.id}`} style={{float:'right'}} onClick={doAcceptSuggestion}>
-            Details
-          </a>
-        </Card.Footer>
-      </Card>
+      <Col>
+        <Card key={idx} bg='light' text='dark' border='dark'>
+          <Card.Body>
+            <Card.Title dangerouslySetInnerHTML={createMarkup(event.title.rendered)}/>
+            <Card.Text dangerouslySetInnerHTML={createMarkup(event.content.rendered)}/>
+          </Card.Body>
+          <Card.Footer>
+            <small className="text-muted">
+              {formatDate(event.start_date)}
+            </small>
+            <a href={`/events#${event.id}`} style={{float:'right'}} onClick={doAcceptSuggestion}>
+              Details
+            </a>
+          </Card.Footer>
+        </Card>
+      </Col>
     )}
-  </CardGroup>
+  </Row>
 );
 // const LinksCmp = ({sorghumLinksSuggestions, doAcceptLinkSuggestion}) => (
 //   <div>
@@ -79,29 +85,31 @@ const EventsCmp = ({sorghumEventsSuggestions, doAcceptSuggestion}) => (
 //   </div>
 // );
 const PapersCmp = ({sorghumPapersSuggestions, sorghumTags, doAcceptSuggestion}) => (
-  <CardGroup>
+  <Row xs={1} md={2} lg={4} className="g-4">
     {sorghumPapersSuggestions && sorghumPapersSuggestions.docs.map((paper,idx) =>
-      <Card key={idx} bg='light' text='dark' border='dark'>
-        <Card.Body>
-          <Card.Title dangerouslySetInnerHTML={createMarkup(paper.title.rendered)}/>
-          <Card.Text>
+      <Col>
+        <Card key={idx} bg='light' text='dark' border='dark'>
+          <Card.Body>
+            <Card.Title dangerouslySetInnerHTML={createMarkup(paper.title.rendered)}/>
+            <Card.Text>
               {paper.paper_authors}<br />
-            <small>
-              {paper.tags.map(t => sorghumTags[t]).join(', ')}
+              <small>
+                {paper.tags.map(t => sorghumTags[t]).join(', ')}
+              </small>
+            </Card.Text>
+          </Card.Body>
+          <Card.Footer>
+            <small className="text-muted">
+              {formatDate(paper.publication_date)}
             </small>
-          </Card.Text>
-        </Card.Body>
-        <Card.Footer>
-          <small className="text-muted">
-            {formatDate(paper.publication_date)}
-          </small>
-          <a href={`/paper/${paper.slug}`} style={{float:'right'}}>
-            Read more
-          </a>
-        </Card.Footer>
-      </Card>
+            <a href={`/paper/${paper.slug}`} style={{float:'right'}}>
+              Read more
+            </a>
+          </Card.Footer>
+        </Card>
+      </Col>
     )}
-  </CardGroup>
+  </Row>
 );
 
 const Posts = connect(
