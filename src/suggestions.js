@@ -33,28 +33,28 @@ const PostsCmp = ({sorghumPostsSuggestions, doAcceptSuggestion}) => (
     )}
   </Row>
 );
-// const ProjectsCmp = ({sorghumProjectsSuggestions, doAcceptPostSuggestion}) => (
-//   <Row xs={1} md={2} lg={4} className="g-4">
-//     {sorghumProjectsSuggestions && sorghumProjectsSuggestions.docs.map((post,idx) =>
-//      <Col>
-//       <Card key={idx} bg='light' text='dark' border='dark'>
-//         <Card.Body>
-//           <Card.Title>{post.title.rendered}</Card.Title>
-//           <Card.Text>{post._embedded.author[0].name}</Card.Text>
-//         </Card.Body>
-//         <Card.Footer>
-//           <small className="text-muted">
-//             {formatDate(post.date)}
-//           </small>
-//           <a href={`/project/${post.slug}`} style={{float:'right'}}>
-//             Read more
-//           </a>
-//         </Card.Footer>
-//       </Card>
-//      </Col>
-//     )}
-//   </Row>
-// );
+const ProjectsCmp = ({sorghumProjectsSuggestions, doAcceptSuggestion}) => (
+  <Row xs={1} md={2} lg={4} className="g-4">
+    {sorghumProjectsSuggestions && sorghumProjectsSuggestions.docs.map((project,idx) =>
+     <Col>
+      <Card key={idx} bg='light' text='dark' border='dark'>
+        <Card.Body>
+          <Card.Title dangerouslySetInnerHTML={createMarkup(project.title.rendered)}/>
+          <Card.Text dangerouslySetInnerHTML={createMarkup(project.project_description.slice(0,400))}/>
+        </Card.Body>
+        <Card.Footer>
+          <small className="text-muted">
+            {funding_agency}-{project.funding_program}:{project.award_id}
+          </small>
+          <a href={`/project/${project.slug}`} style={{float:'right'}} onClick={doAcceptSuggestion}>
+            Read more
+          </a>
+        </Card.Footer>
+      </Card>
+     </Col>
+    )}
+  </Row>
+);
 const EventsCmp = ({sorghumEventsSuggestions, doAcceptSuggestion}) => (
   <Row xs={1} md={2} lg={4} className="g-4">
     {sorghumEventsSuggestions && sorghumEventsSuggestions.docs.map((event,idx) =>
@@ -117,11 +117,11 @@ const Posts = connect(
   'doAcceptSuggestion',
   PostsCmp
 );
-// const Projects = connect(
-//   'selectSorghumProjectsSuggestions',
-//   'doAcceptProjectSuggestion',
-//   ProjectsCmp
-// );
+const Projects = connect(
+  'selectSorghumProjectsSuggestions',
+  'doAcceptSuggestion',
+  ProjectsCmp
+);
 const Events = connect(
   'selectSorghumEventsSuggestions',
   'doAcceptSuggestion',
@@ -153,7 +153,7 @@ const status = (results) => {
   return results ? results.numFound : "..."
 };
 
-const Suggestions = ({   sorghumPostsSuggestions, sorghumEventsSuggestions,
+const Suggestions = ({   sorghumPostsSuggestions, sorghumProjectsSuggestions, sorghumEventsSuggestions,
                          sorghumPapersSuggestions,
                          sorghumTab, doChangeSorghumTab
                        }) => (
@@ -162,7 +162,7 @@ const Suggestions = ({   sorghumPostsSuggestions, sorghumEventsSuggestions,
     activeKey={sorghumTab}
     onSelect={(k) => doChangeSorghumTab(k)}>
     <Tab eventKey='Posts' title={`Posts ${status(sorghumPostsSuggestions)}`}><Posts/></Tab>
-    {/*<Tab eventKey='Projects' title={`Projects ${status(sorghumProjectsSuggestions)}`}><Projects/></Tab>*/}
+    <Tab eventKey='Projects' title={`Projects ${status(sorghumProjectsSuggestions)}`}><Projects/></Tab>
     <Tab eventKey='Events' title={`Events ${status(sorghumEventsSuggestions)}`}><Events/></Tab>
     {/*<Tab eventKey='Links' title={`Links ${status(sorghumLinksSuggestions)}`}><Links/></Tab>*/}
     <Tab eventKey='Papers' title={`Papers ${status(sorghumPapersSuggestions)}`}><Papers/></Tab>
@@ -171,7 +171,7 @@ const Suggestions = ({   sorghumPostsSuggestions, sorghumEventsSuggestions,
 
 export default connect(
   'selectSorghumPostsSuggestions',
-  // 'selectSorghumProjectsSuggestions',
+  'selectSorghumProjectsSuggestions',
   'selectSorghumEventsSuggestions',
   // 'selectSorghumLinksSuggestions',
   'selectSorghumPapersSuggestions',
