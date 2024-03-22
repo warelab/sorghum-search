@@ -44,7 +44,7 @@ const ProjectsCmp = ({sorghumProjectsSuggestions, doAcceptSuggestion}) => (
         </Card.Body>
         <Card.Footer>
           <small className="text-muted">
-            {funding_agency}-{project.funding_program}:{project.award_id}
+            {project.funding_agency}-{project.funding_program}:{project.award_id}
           </small>
           <a href={`/project/${project.slug}`} style={{float:'right'}} onClick={doAcceptSuggestion}>
             Read more
