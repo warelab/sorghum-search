@@ -147,25 +147,25 @@ sorghumPostsSuggestions.reactSorghumPostsSuggestions = createSelector(
   }
 );
 
-// const sorghumProjectsSuggestions = createAsyncResourceBundle({
-//   name: 'sorghumProjectsSuggestions',
-//   actionBaseType: 'SORGHUM_PROJECTS_SUGGESTIONS',
-//   persist: false,
-//   getPromise: ({store}) =>
-//     fetch(`${API}/project?q=${store.selectSuggestionsQuery()}&rows=100`)
-//       .then(res => res.json())
-// });
-//
-// sorghumProjectsSuggestions.reactSorghumProjectsSuggestions = createSelector(
-//   'selectSorghumProjectsSuggestionsShouldUpdate',
-//   'selectSuggestionsQuery',
-//   (shouldUpdate, queryString) => {
-//     if (shouldUpdate && queryString.length > 1) {
-//       return {actionCreator: 'doFetchSorghumProjectsSuggestions'}
-//     }
-//   }
-// );
-//
+const sorghumProjectsSuggestions = createAsyncResourceBundle({
+  name: 'sorghumProjectsSuggestions',
+  actionBaseType: 'SORGHUM_PROJECTS_SUGGESTIONS',
+  persist: false,
+  getPromise: ({store}) =>
+    fetch(`${API}/project?q=${store.selectSuggestionsQuery()}&rows=100`)
+      .then(res => res.json())
+});
+
+sorghumProjectsSuggestions.reactSorghumProjectsSuggestions = createSelector(
+  'selectSorghumProjectsSuggestionsShouldUpdate',
+  'selectSuggestionsQuery',
+  (shouldUpdate, queryString) => {
+    if (shouldUpdate && queryString.length > 1) {
+      return {actionCreator: 'doFetchSorghumProjectsSuggestions'}
+    }
+  }
+);
+
 // const sorghumLinksSuggestions = createAsyncResourceBundle({
 //   name: 'sorghumLinksSuggestions',
 //   actionBaseType: 'SORGHUM_LINKS_SUGGESTIONS',
@@ -300,7 +300,7 @@ export default [
   sorghumPapers,
   sorghumTags,
   sorghumPostsSuggestions,
-  // sorghumProjectsSuggestions,
+  sorghumProjectsSuggestions,
   // sorghumLinksSuggestions,
   // sorghumPeopleSuggestions,
   sorghumEventsSuggestions,
