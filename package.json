@@ -22,7 +22,7 @@
     "react-debounce-input": "^3.2.3",
     "react-dom": "^17.0.2",
     "redux-bundler": "^21.0.0",
-    "redux-bundler-react": "^1.0.1"
+    "redux-bundler-react": "^1.2.0"
   },
   "prettier": {
     "singleQuote": true,
@@ -32,8 +32,9 @@
     "@babel/core": "latest",
     "@babel/preset-env": "latest",
     "@babel/preset-react": "latest",
-    "@parcel/transformer-image": "^2.0.0-rc.0",
-    "@parcel/transformer-less": "^2.0.0-rc.0",
-    "parcel": "^2.0.0-rc.0"
+    "@parcel/transformer-image": "^2.8.0",
+    "@parcel/transformer-js": "^2.8.0",
+    "@parcel/transformer-less": "^2.8.0",
+    "parcel": "^2.8.0"
   }
 }
