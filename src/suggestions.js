@@ -40,7 +40,7 @@ const ProjectsCmp = ({sorghumProjectsSuggestions, doAcceptSuggestion}) => (
       <Card key={idx} bg='light' text='dark' border='dark'>
         <Card.Body>
           <Card.Title dangerouslySetInnerHTML={createMarkup(project.title.rendered)}/>
-          <Card.Text dangerouslySetInnerHTML={createMarkup(project.project_description.slice(0,400))}/>
+          <Card.Text dangerouslySetInnerHTML={createMarkup(project.project_description.slice(0,400) + "...")}/>
         </Card.Body>
         <Card.Footer>
           <small className="text-muted">
