@@ -166,6 +166,24 @@ sorghumProjectsSuggestions.reactSorghumProjectsSuggestions = createSelector(
   }
 );
 
+const sorghumAbstractsSuggestions = createAsyncResourceBundle({
+  name: 'sorghumAbstractsSuggestions',
+  actionBaseType: 'SORGHUM_ABSTRACTS_SUGGESTIONS',
+  persist: false,
+  getPromise: ({store}) =>
+    fetch(`${API}/abstract?q=${store.selectSuggestionsQuery()}&rows=100`)
+      .then(res => res.json())
+});
+
+sorghumAbstractsSuggestions.reactSorghumAbstractsSuggestions = createSelector(
+  'selectSorghumAbstractsSuggestionsShouldUpdate',
+  'selectSuggestionsQuery',
+  (shouldUpdate, queryString) => {
+    if (shouldUpdate && queryString.length > 1) {
+      return {actionCreator: 'doFetchSorghumAbstractsSuggestions'}
+    }
+  }
+);
 // const sorghumLinksSuggestions = createAsyncResourceBundle({
 //   name: 'sorghumLinksSuggestions',
 //   actionBaseType: 'SORGHUM_LINKS_SUGGESTIONS',
@@ -301,6 +319,7 @@ export default [
   sorghumTags,
   sorghumPostsSuggestions,
   sorghumProjectsSuggestions,
+  sorghumAbstractsSuggestions,
   // sorghumLinksSuggestions,
   // sorghumPeopleSuggestions,
   sorghumEventsSuggestions,

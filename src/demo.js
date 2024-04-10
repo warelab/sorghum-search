@@ -14,8 +14,8 @@ const cache = getConfiguredCache({
 });
 
 const initialState = {
-  ensemblSite: '//banon:88',
-  grameneData: 'https://data.sorghumbase.org/sorghum2',
+  ensemblSite: 'https://ensembl.sorghumbase.org',
+  grameneData: 'https://data.sorghumbase.org/sorghum_v7',
   targetTaxonId: 4558
 };
 

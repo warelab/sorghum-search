@@ -55,6 +55,28 @@ const ProjectsCmp = ({sorghumProjectsSuggestions, doAcceptSuggestion}) => (
     )}
   </Row>
 );
+const AbstractsCmp = ({sorghumAbstractsSuggestions, doAcceptSuggestion}) => (
+  <Row xs={1} md={2} lg={4} className="g-4">
+    {sorghumAbstractsSuggestions && sorghumAbstractsSuggestions.docs.map((abstract,idx) =>
+      <Col>
+        <Card key={idx} bg='light' text='dark' border='dark'>
+          <Card.Body>
+            <Card.Title dangerouslySetInnerHTML={createMarkup(abstract.title.rendered)}/>
+            <Card.Text dangerouslySetInnerHTML={createMarkup(abstract.content.rendered}/>
+          </Card.Body>
+          <Card.Footer>
+            <small className="text-muted">
+              {abstract.conference_name}_{abstract.conference_date}:{abstract.presentation_type}
+            </small>
+            <a href={`/abstract/${abstract.slug}`} style={{float:'right'}} onClick={doAcceptSuggestion}>
+              Read more
+            </a>
+          </Card.Footer>
+        </Card>
+      </Col>
+    )}
+  </Row>
+);
 const EventsCmp = ({sorghumEventsSuggestions, doAcceptSuggestion}) => (
   <Row xs={1} md={2} lg={4} className="g-4">
     {sorghumEventsSuggestions && sorghumEventsSuggestions.docs.map((event,idx) =>
@@ -122,6 +144,11 @@ const Projects = connect(
   'doAcceptSuggestion',
   ProjectsCmp
 );
+const Abstracts = connect(
+  'selectSorghumAbstractsSuggestions',
+  'doAcceptSuggestion',
+  AbstractsCmp
+);
 const Events = connect(
   'selectSorghumEventsSuggestions',
   'doAcceptSuggestion',
@@ -154,7 +181,7 @@ const status = (results) => {
 };
 
 const Suggestions = ({   sorghumPostsSuggestions, sorghumProjectsSuggestions, sorghumEventsSuggestions,
-                         sorghumPapersSuggestions,
+                         sorghumPapersSuggestions, sorghumAbstractsSuggestions,
                          sorghumTab, doChangeSorghumTab
                        }) => (
   <Tabs
@@ -163,9 +190,10 @@ const Suggestions = ({   sorghumPostsSuggestions, sorghumProjectsSuggestions, so
     onSelect={(k) => doChangeSorghumTab(k)}>
     <Tab eventKey='Posts' title={`Posts ${status(sorghumPostsSuggestions)}`}><Posts/></Tab>
     <Tab eventKey='Projects' title={`Projects ${status(sorghumProjectsSuggestions)}`}><Projects/></Tab>
-    <Tab eventKey='Events' title={`Events ${status(sorghumEventsSuggestions)}`}><Events/></Tab>
     {/*<Tab eventKey='Links' title={`Links ${status(sorghumLinksSuggestions)}`}><Links/></Tab>*/}
     <Tab eventKey='Papers' title={`Papers ${status(sorghumPapersSuggestions)}`}><Papers/></Tab>
+    <Tab eventKey='Abstracts' title={`Conference Abstracts ${status(sorghumAbstractsSuggestions)}`}><Abstracts/></Tab>
+    <Tab eventKey='Events' title={`Events ${status(sorghumEventsSuggestions)}`}><Events/></Tab>
   </Tabs>
 );
 
@@ -175,6 +203,7 @@ export default connect(
   'selectSorghumEventsSuggestions',
   // 'selectSorghumLinksSuggestions',
   'selectSorghumPapersSuggestions',
+  'selectSorghumAbstractsSuggestions',
   'selectSorghumTab',
   'doChangeSorghumTab',
   Suggestions
