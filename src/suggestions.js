@@ -201,7 +201,6 @@ export default connect(
   'selectSorghumPostsSuggestions',
   'selectSorghumProjectsSuggestions',
   'selectSorghumEventsSuggestions',
-  // 'selectSorghumLinksSuggestions',
   'selectSorghumPapersSuggestions',
   'selectSorghumAbstractsSuggestions',
   'selectSorghumTab',
