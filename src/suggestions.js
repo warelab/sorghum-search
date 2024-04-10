@@ -62,7 +62,7 @@ const AbstractsCmp = ({sorghumAbstractsSuggestions, doAcceptSuggestion}) => (
         <Card key={idx} bg='light' text='dark' border='dark'>
           <Card.Body>
             <Card.Title dangerouslySetInnerHTML={createMarkup(abstract.title.rendered)}/>
-            <Card.Text dangerouslySetInnerHTML={createMarkup(abstract.content.rendered}/>
+            <Card.Text dangerouslySetInnerHTML={createMarkup(abstract.content.rendered)}/>
           </Card.Body>
           <Card.Footer>
             <small className="text-muted">
