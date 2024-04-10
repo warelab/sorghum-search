@@ -16,7 +16,7 @@ const PostsCmp = ({sorghumPostsSuggestions, doAcceptSuggestion}) => (
     {sorghumPostsSuggestions && sorghumPostsSuggestions.docs.map((post,idx) =>
       <Col>
         <Card key={idx} bg='light' text='dark' border='dark'>
-          <Card.Body>
+          <Card.Body style={{maxHeight:"20em", overflowY: "scroll"}}>
             <Card.Title dangerouslySetInnerHTML={createMarkup(post.title.rendered)}/>
             <Card.Text dangerouslySetInnerHTML={createMarkup(post.excerpt.rendered)}/>
           </Card.Body>
@@ -38,9 +38,9 @@ const ProjectsCmp = ({sorghumProjectsSuggestions, doAcceptSuggestion}) => (
     {sorghumProjectsSuggestions && sorghumProjectsSuggestions.docs.map((project,idx) =>
      <Col>
       <Card key={idx} bg='light' text='dark' border='dark'>
-        <Card.Body>
+        <Card.Body style={{maxHeight:"20em", overflowY: "scroll"}}>
           <Card.Title dangerouslySetInnerHTML={createMarkup(project.title.rendered)}/>
-          <Card.Text dangerouslySetInnerHTML={createMarkup(project.project_description.slice(0,400) + "...")}/>
+          <Card.Text dangerouslySetInnerHTML={createMarkup(project.project_description)}/>
         </Card.Body>
         <Card.Footer>
           <small className="text-muted">
@@ -60,7 +60,7 @@ const AbstractsCmp = ({sorghumAbstractsSuggestions, doAcceptSuggestion}) => (
     {sorghumAbstractsSuggestions && sorghumAbstractsSuggestions.docs.map((abstract,idx) =>
       <Col>
         <Card key={idx} bg='light' text='dark' border='dark'>
-          <Card.Body>
+          <Card.Body style={{maxHeight:"20em", overflowY: "scroll"}}>
             <Card.Title dangerouslySetInnerHTML={createMarkup(abstract.title.rendered)}/>
             <Card.Text dangerouslySetInnerHTML={createMarkup(abstract.content.rendered)}/>
           </Card.Body>
