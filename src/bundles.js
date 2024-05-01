@@ -171,7 +171,7 @@ const sorghumAbstractsSuggestions = createAsyncResourceBundle({
   actionBaseType: 'SORGHUM_ABSTRACTS_SUGGESTIONS',
   persist: false,
   getPromise: ({store}) =>
-    fetch(`${API}/abstract?q=${store.selectSuggestionsQuery()}&rows=100`)
+    fetch(`${API}/conference_abstract?q=${store.selectSuggestionsQuery()}&rows=100`)
       .then(res => res.json())
 });
 
