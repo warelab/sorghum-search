@@ -66,7 +66,7 @@ const AbstractsCmp = ({sorghumAbstractsSuggestions, doAcceptSuggestion}) => (
           </Card.Body>
           <Card.Footer>
             <small className="text-muted">
-              SICNA_2024:{abstract.presentation_type}
+              Conference {abstract.presentation_type}
             </small>
             <a href={`/abstract/${abstract.slug}`} style={{float:'right'}} onClick={doAcceptSuggestion}>
               Read more
