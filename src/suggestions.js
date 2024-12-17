@@ -106,6 +106,7 @@ const EventsCmp = ({sorghumEventsSuggestions, doAcceptSuggestion}) => (
 //     )}
 //   </div>
 // );
+// make sure sorghumTags is here
 const PapersCmp = ({sorghumPapersSuggestions, sorghumTags, doAcceptSuggestion}) => (
   <Row xs={1} md={2} lg={4} className="g-4">
     {sorghumTags && sorghumPapersSuggestions && sorghumPapersSuggestions.docs.map((paper,idx) =>
