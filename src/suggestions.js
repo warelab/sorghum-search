@@ -108,7 +108,7 @@ const EventsCmp = ({sorghumEventsSuggestions, doAcceptSuggestion}) => (
 // );
 const PapersCmp = ({sorghumPapersSuggestions, sorghumTags, doAcceptSuggestion}) => (
   <Row xs={1} md={2} lg={4} className="g-4">
-    {sorghumPapersSuggestions && sorghumPapersSuggestions.docs.map((paper,idx) =>
+    {sorghumTags && sorghumPapersSuggestions && sorghumPapersSuggestions.docs.map((paper,idx) =>
       <Col>
         <Card key={idx} bg='light' text='dark' border='dark'>
           <Card.Body>
