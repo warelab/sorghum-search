@@ -6,10 +6,10 @@ const ensureString = input =>
   isString(input) ? input : qs.stringify(input);
 const clearSuggestions = [
   {type: 'SORGHUM_POSTS_SUGGESTIONS_CLEARED'},
-//   {type: 'SORGHUM_PROJECTS_SUGGESTIONS_CLEARED'},
+  {type: 'SORGHUM_PROJECTS_SUGGESTIONS_CLEARED'},
 //   {type: 'SORGHUM_LINKS_SUGGESTIONS_CLEARED'},
   {type: 'SORGHUM_EVENTS_SUGGESTIONS_CLEARED'},
-//   {type: 'SORGHUM_PEOPLE_SUGGESTIONS_CLEARED'},
+  {type: 'SORGHUM_ABSTRACTS_SUGGESTIONS_CLEARED'},
   {type: 'SORGHUM_PAPERS_SUGGESTIONS_CLEARED'},
   {type: 'GRAMENE_SUGGESTIONS_CLEARED'},
   {type: 'SUGGESTIONS_CLEARED'}
@@ -75,8 +75,8 @@ const UIbundle = {
     else loading++;
     if (state.sorghumProjectsSuggestions && state.sorghumProjectsSuggestions.data) matches += state.sorghumProjectsSuggestions.data.numFound;
     else loading++;
-//     if (state.sorghumLinksSuggestions && state.sorghumLinksSuggestions.data) matches += state.sorghumLinksSuggestions.data.numFound;
-//     else loading++;
+    if (state.sorghumAbstractsSuggestions && state.sorghumAbstractsSuggestions.data) matches += state.sorghumAbstractsSuggestions.data.numFound;
+    else loading++;
     if (state.sorghumEventsSuggestions && state.sorghumEventsSuggestions.data) matches += state.sorghumEventsSuggestions.data.numFound;
     else loading++;
     if (state.sorghumPapersSuggestions && state.sorghumPapersSuggestions.data) matches += state.sorghumPapersSuggestions.data.numFound;

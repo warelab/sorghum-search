@@ -260,6 +260,7 @@ const sorghumPapersSuggestions = createAsyncResourceBundle({
     fetch(`${API}/scientific_paper?q=${store.selectSuggestionsQuery()}&rows=100`)
       .then(res => res.json())
       .then(papers => {
+        papers.docs.sort((a,b) => new Date(b.publication_date) - new Date(a.publication_date));
         const q = store.selectSuggestionsQuery()
         return q === papers.q ? papers : store.selectPapersSuggestions()
       })

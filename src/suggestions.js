@@ -66,7 +66,9 @@ const AbstractsCmp = ({sorghumAbstractsSuggestions, doAcceptSuggestion}) => (
           </Card.Body>
           <Card.Footer>
             <small className="text-muted">
-              SICNA {abstract.presentation_type}
+              {abstract.hasOwnProperty('_embedded') && abstract['_embedded'].hasOwnProperty('wp:term') ?
+                abstract['_embedded']['wp:term'][0][0]['name'] : 'SICNA'
+              } {abstract.presentation_type}
             </small>
             <a href={`/abstract/${abstract.slug}`} style={{float:'right'}} onClick={doAcceptSuggestion}>
               Read more
