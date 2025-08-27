@@ -132,8 +132,11 @@ const sorghumPostsSuggestions = createAsyncResourceBundle({
     fetch(`${API}/posts?q=${store.selectSuggestionsQuery()}&rows=100`)
       .then(res => res.json())
       .then(posts => {
-        const q = store.selectSuggestionsQuery()
-        return q === posts.q ? posts : store.selectPostsSuggestions()
+          const filtered = posts.docs.filter(d => matchesAtWordStart(d.content.rendered, posts.q));
+          posts.docs = filtered;
+          posts.numFound = filtered.length;
+          const q = store.selectSuggestionsQuery()
+          return q === posts.q ? posts : store.selectPostsSuggestions()
       })
 });
 
@@ -154,6 +157,13 @@ const sorghumProjectsSuggestions = createAsyncResourceBundle({
   getPromise: ({store}) =>
     fetch(`${API}/project?q=${store.selectSuggestionsQuery()}&rows=100`)
       .then(res => res.json())
+      .then(projects => {
+        const filtered = projects.docs.filter(d => matchesAtWordStart(d.content.rendered, projects.q));
+        projects.docs = filtered;
+        projects.numFound = filtered.length;
+        const q = store.selectSuggestionsQuery()
+        return q === projects.q ? projects : store.selectProjectsSuggestions()
+      })
 });
 
 sorghumProjectsSuggestions.reactSorghumProjectsSuggestions = createSelector(
@@ -173,6 +183,13 @@ const sorghumAbstractsSuggestions = createAsyncResourceBundle({
   getPromise: ({store}) =>
     fetch(`${API}/conference_abstract?q=${store.selectSuggestionsQuery()}&rows=100`)
       .then(res => res.json())
+      .then(abstracts => {
+        const filtered = abstracts.docs.filter(d => matchesAtWordStart(d.content.rendered, abstracts.q));
+        abstracts.docs = filtered;
+        abstracts.numFound = filtered.length;
+        const q = store.selectSuggestionsQuery()
+        return q === abstracts.q ? abstracts : store.selectAbstractsSuggestions()
+      })
 });
 
 sorghumAbstractsSuggestions.reactSorghumAbstractsSuggestions = createSelector(
@@ -251,7 +268,10 @@ sorghumEventsSuggestions.reactSorghumEventsSuggestions = createSelector(
     }
   }
 );
-
+function matchesAtWordStart(str, query) {
+  const regex = new RegExp("\\b" + query, "i"); // "i" makes it case-insensitive
+  return regex.test(str);
+}
 const sorghumPapersSuggestions = createAsyncResourceBundle({
   name: 'sorghumPapersSuggestions',
   actionBaseType: 'SORGHUM_PAPERS_SUGGESTIONS',
@@ -260,6 +280,9 @@ const sorghumPapersSuggestions = createAsyncResourceBundle({
     fetch(`${API}/scientific_paper?q=${store.selectSuggestionsQuery()}&rows=100`)
       .then(res => res.json())
       .then(papers => {
+        const filtered = papers.docs.filter(d => matchesAtWordStart(d.content.rendered, papers.q));
+        papers.docs = filtered;
+        papers.numFound = filtered.length;
         papers.docs.sort((a,b) => new Date(b.publication_date) - new Date(a.publication_date));
         const q = store.selectSuggestionsQuery()
         return q === papers.q ? papers : store.selectPapersSuggestions()
