@@ -108,19 +108,16 @@ const EventsCmp = ({sorghumEventsSuggestions, doAcceptSuggestion}) => (
 //     )}
 //   </div>
 // );
-// make sure sorghumTags is here
-const PapersCmp = ({sorghumPapersSuggestions, sorghumTags, doAcceptSuggestion}) => (
+const PapersCmp = ({sorghumPapersSuggestions, doAcceptSuggestion}) => (
   <Row xs={1} md={2} lg={4} className="g-4">
-    {sorghumTags && sorghumPapersSuggestions && sorghumPapersSuggestions.docs.map((paper,idx) =>
+    {sorghumPapersSuggestions && sorghumPapersSuggestions.docs.map((paper,idx) =>
       <Col>
         <Card key={idx} bg='light' text='dark' border='dark'>
           <Card.Body>
             <Card.Title dangerouslySetInnerHTML={createMarkup(paper.title.rendered)}/>
             <Card.Text>
               {paper.paper_authors}<br />
-              <small>
-                {paper.tags.map(t => sorghumTags[t]).join(', ')}
-              </small>
+              <small>{paper.keywords}</small>
             </Card.Text>
           </Card.Body>
           <Card.Footer>
@@ -164,7 +161,6 @@ const Events = connect(
 // );
 const Papers = connect(
   'selectSorghumPapersSuggestions',
-  'selectSorghumTags',
   'doAcceptSuggestion',
   PapersCmp
 );

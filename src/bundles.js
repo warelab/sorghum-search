@@ -309,23 +309,23 @@ sorghumPapersSuggestions.reactSorghumPapersSuggestions = createSelector(
   }
 );
 
-const sorghumTags = createAsyncResourceBundle( {
-  name: 'sorghumTags',
-  actionBaseType: 'SORGHUM_TAGS',
-  persist: false,
-  getPromise: ({store}) =>
-    fetch(`${API}/tags`)
-      .then(res => res.json())
-});
-
-sorghumTags.reactSorghumTags = createSelector(
-  'selectSorghumTagsShouldUpdate',
-  (shouldUpdate) => {
-    if (shouldUpdate) {
-      return {actionCreator: 'doFetchSorghumTags'}
-    }
-  }
-);
+// const sorghumTags = createAsyncResourceBundle( {
+//   name: 'sorghumTags',
+//   actionBaseType: 'SORGHUM_TAGS',
+//   persist: false,
+//   getPromise: ({store}) =>
+//     fetch(`${API}/tags`)
+//       .then(res => res.json())
+// });
+//
+// sorghumTags.reactSorghumTags = createSelector(
+//   'selectSorghumTagsShouldUpdate',
+//   (shouldUpdate) => {
+//     if (shouldUpdate) {
+//       return {actionCreator: 'doFetchSorghumTags'}
+//     }
+//   }
+// );
 
 // sorghumPostsSuggestions.doAcceptPostSuggestion = post => {
 //   console.log(post)
@@ -350,7 +350,7 @@ export default [
   // sorghumPeople,
   sorghumEvents,
   sorghumPapers,
-  sorghumTags,
+  // sorghumTags,
   sorghumPostsSuggestions,
   sorghumProjectsSuggestions,
   sorghumAbstractsSuggestions,
