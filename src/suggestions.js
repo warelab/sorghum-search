@@ -12,7 +12,7 @@ function createMarkup(content) {
   return {__html: content}
 }
 const PostsCmp = ({sorghumPostsSuggestions, doAcceptSuggestion}) => (
-  <Row xs={1} md={2} lg={4} className="g-4">
+  <Row xs={1} md={2} lg={4} className="g-4 suggestion-results">
     {sorghumPostsSuggestions && sorghumPostsSuggestions.docs.map((post,idx) =>
       <Col>
         <Card key={idx} bg='light' text='dark' border='dark'>
@@ -34,7 +34,7 @@ const PostsCmp = ({sorghumPostsSuggestions, doAcceptSuggestion}) => (
   </Row>
 );
 const ProjectsCmp = ({sorghumProjectsSuggestions, doAcceptSuggestion}) => (
-  <Row xs={1} md={2} lg={4} className="g-4">
+  <Row xs={1} md={2} lg={4} className="g-4 suggestion-results">
     {sorghumProjectsSuggestions && sorghumProjectsSuggestions.docs.map((project,idx) =>
      <Col>
       <Card key={idx} bg='light' text='dark' border='dark'>
@@ -56,7 +56,7 @@ const ProjectsCmp = ({sorghumProjectsSuggestions, doAcceptSuggestion}) => (
   </Row>
 );
 const AbstractsCmp = ({sorghumAbstractsSuggestions, doAcceptSuggestion}) => (
-  <Row xs={1} md={2} lg={4} className="g-4">
+  <Row xs={1} md={2} lg={4} className="g-4 suggestion-results">
     {sorghumAbstractsSuggestions && sorghumAbstractsSuggestions.docs.map((abstract,idx) =>
       <Col>
         <Card key={idx} bg='light' text='dark' border='dark'>
@@ -80,7 +80,7 @@ const AbstractsCmp = ({sorghumAbstractsSuggestions, doAcceptSuggestion}) => (
   </Row>
 );
 const EventsCmp = ({sorghumEventsSuggestions, doAcceptSuggestion}) => (
-  <Row xs={1} md={2} lg={4} className="g-4">
+  <Row xs={1} md={2} lg={4} className="g-4 suggestion-results">
     {sorghumEventsSuggestions && sorghumEventsSuggestions.docs.map((event,idx) =>
       <Col>
         <Card key={idx} bg='light' text='dark' border='dark'>
@@ -109,7 +109,7 @@ const EventsCmp = ({sorghumEventsSuggestions, doAcceptSuggestion}) => (
 //   </div>
 // );
 const PapersCmp = ({sorghumPapersSuggestions, doAcceptSuggestion}) => (
-  <Row xs={1} md={2} lg={4} className="g-4">
+  <Row xs={1} md={2} lg={4} className="g-4 suggestion-results">
     {sorghumPapersSuggestions && sorghumPapersSuggestions.docs.map((paper,idx) =>
       <Col>
         <Card key={idx} bg='light' text='dark' border='dark'>
